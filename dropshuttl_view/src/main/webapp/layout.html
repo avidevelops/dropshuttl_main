@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+    <head>
+        <title>HTML Layout</title>
+        <link rel="stylesheet" href="css/dropshuttl.css" type="text/css"/>
+        <style>
+            .dropshuttl-shell-head, .dropshuttl-shell-head-logo, .dropshuttl-shell-head-navigation,
+            .dropshuttl-shell-head-account, .dropshuttl-shell-main, .dropshuttl-shell-main-content,
+            .dropshuttl-shell-footer, .dropshuttl-shell-chat, .dropshuttl-shell-modal{
+                position: absolute;
+            }
+            .dropshuttl-shell-head{
+                top:0;
+                right:0;
+                left:0;
+                height: 40px;
+            }
+            .dropshuttl-shell-head-logo{
+                top: 4px;
+                left: 4px;
+                height: 32px;
+                width: 128px;
+                background : orange;
+            }
+            .dropshuttl-shell-head-navigation{
+                top: 4px;
+                left: 140px;
+                height: 32px;
+                width: 800px;
+                background : darkred;
+            }
+            .dropshuttl-shell-head-account {
+                top    : 4px;
+                right  : 0;
+                width  : 100px;
+                height : 32px;
+                background : green;
+            }
+            .dropshuttl-shell-main {
+                top    : 40px;
+                left   : 0;
+                bottom : 40px;
+                right  : 0;
+            }
+
+            .dropshuttl-shell-main-content {
+                top        : 0;
+                bottom     : 0;
+                left       : 0;
+                right      : 0;
+                background : #ddd;
+            }
+            .dropshuttl-shell-footer {
+                bottom : 0;
+                left   : 0;
+                right  : 0;
+                height : 40px;
+            }
+            .dropshuttl-shell-chat {
+                bottom     : 0;
+                right      : 0;
+                width      : 300px;
+                height     : 25px;
+                background : red;
+                z-index    : 1;
+            }
+            .dropshuttl-shell-modal {
+                margin-top    : -200px;
+                margin-left   : -200px;
+                top           : 50%;
+                left          : 50%;
+                width         : 400px;
+                height        : 400px;
+                background    : #fff;
+                border-radius : 3px;
+                z-index       : 2;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="dropshuttl">
+            <div class="dropshuttl-shell-head">
+                <div class="dropshuttl-shell-head-logo"></div>
+                <div class="dropshuttl-shell-head-navigation"></div>
+                <div class="dropshuttl-shell-head-account"></div>
+            </div>
+            <div class="dropshuttl-shell-main">
+                <div class="dropshuttl-shell-main-content"></div>
+            </div>
+            <div class="dropshuttl-shell-footer"></div>
+            <div class="dropshuttl-shell-chat"></div>
+            <div class="dropshuttl-shell-modal"></div>
+        </div>
+    </body>
+</html>
