@@ -11,7 +11,13 @@
   <packaging>war</packaging>
   <name>dropshuttl_view Maven Webapp</name>
   <url>http://maven.apache.org</url>
-  
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			</dependency>
+	</dependencies>
   <build>
     <finalName>dropshuttl_view</finalName>
   </build>
