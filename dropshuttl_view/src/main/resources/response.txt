@@ -1,0 +1,91 @@
+{
+  "results": [
+    {
+      "formatted_address": "Mayur Vihar Phase 1, New Delhi, Delhi 110091, India",
+      "types": [
+        "political",
+        "sublocality",
+        "sublocality_level_1"
+      ],
+      "geometry": {
+        "viewport": {
+          "southwest": {
+            "lng": 77.28305309999999,
+            "lat": 28.5889456
+          },
+          "northeast": {
+            "lng": 77.3095185,
+            "lat": 28.614789
+          }
+        },
+        "bounds": {
+          "southwest": {
+            "lng": 77.28305309999999,
+            "lat": 28.5889456
+          },
+          "northeast": {
+            "lng": 77.3095185,
+            "lat": 28.614789
+          }
+        },
+        "location": {
+          "lng": 77.2936763,
+          "lat": 28.6065926
+        },
+        "location_type": "APPROXIMATE"
+      },
+      "address_components": [
+        {
+          "types": [
+            "political",
+            "sublocality",
+            "sublocality_level_1"
+          ],
+          "short_name": "Mayur Vihar Phase 1",
+          "long_name": "Mayur Vihar Phase 1"
+        },
+        {
+          "types": [
+            "locality",
+            "political"
+          ],
+          "short_name": "New Delhi",
+          "long_name": "New Delhi"
+        },
+        {
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ],
+          "short_name": "East Delhi",
+          "long_name": "East Delhi"
+        },
+        {
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ],
+          "short_name": "DL",
+          "long_name": "Delhi"
+        },
+        {
+          "types": [
+            "country",
+            "political"
+          ],
+          "short_name": "IN",
+          "long_name": "India"
+        },
+        {
+          "types": [
+            "postal_code"
+          ],
+          "short_name": "110091",
+          "long_name": "110091"
+        }
+      ],
+      "place_id": "ChIJDSxD35DkDDkRXW-4A3USP5g"
+    }
+  ],
+  "status": "OK"
+}
