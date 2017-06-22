@@ -1,18 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<meta name="google-signin-client_id" content="362427914912-05uomo62q57tac5rcnmc5849cgv313ds.apps.googleusercontent.com">
-<title>Welcome To Drop Shuttl</title>
-<link rel="stylesheet" href="../css/main.css">
-<script src="../js/jq/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="../js/login.js"></script>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
 
-</head>
-<body>
 
 <button onclick="document.getElementById('ds-login').style.display='block'" style="width:auto;">Login</button>
+<button style="width:auto;">Sign Up</button>
 
 <div id="ds-login" class="modal">
   
@@ -21,7 +10,7 @@
       <span onclick="document.getElementById('ds-login').style.display='none'" class="close" title="Close Modal">&times;</span>
     </div>
 
-    <div class="container">
+    <div class="container" style="width:auto;">
       <input type="text" placeholder="Enter Username" name="uname" required>
       <input type="password" placeholder="Enter Password" name="psw" required>
         
@@ -34,16 +23,14 @@
       <div id="my-signin2"></div><br/>
       <div class="fb-login-button" data-max-rows="1" data-width="306" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
       
-    </div>
     
-    <div class="container">
     <span>Need an account? </span>
     <button type="submit" >Sign up</button> 
     </div> 
       </form>
 </div>
 <!-- login with google  -->
-<script>
+ <script>
     function onSuccess(googleUser) {
       console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
     }
@@ -64,7 +51,7 @@
   </script>
   
   <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-<!-- Login with Facebook javascript    -->
+<!--  Login with Facebook javascript  --> 
 <script>
   window.fbAsyncInit = function() {
     FB.init({
@@ -84,6 +71,4 @@
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 </script>
-  
-</body>
-</html>
+ 

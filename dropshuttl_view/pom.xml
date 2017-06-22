@@ -5,13 +5,19 @@
   <parent>
     <groupId>com.app.dropshuttl</groupId>
     <artifactId>dropshuttl_main</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-Release</version>
   </parent>
   <artifactId>dropshuttl_view</artifactId>
   <packaging>war</packaging>
   <name>dropshuttl_view Maven Webapp</name>
   <url>http://maven.apache.org</url>
 	<dependencies>
+	  <dependency>
+			<groupId>com.app.dropshuttl</groupId>
+			<artifactId>dropshuttl_dao</artifactId>
+			<version>1.0.0-Release</version>
+		</dependency>
+	
 		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
