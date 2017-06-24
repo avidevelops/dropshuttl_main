@@ -5,7 +5,7 @@ app.controller('signUpCtrl', ['$scope','$http','$location',function($scope,$http
 	
 	
 
-	$scope.validateForm=function(){
+	$scope.validateForm=function(user){
 		
 	//var data=$scope.user;
 	var config = {
