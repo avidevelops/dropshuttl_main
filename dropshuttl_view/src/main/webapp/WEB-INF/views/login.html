@@ -1,0 +1,74 @@
+
+
+<button onclick="document.getElementById('ds-login').style.display='block'" style="width:auto;">Login</button>
+<button style="width:auto;">Sign Up</button>
+
+<div id="ds-login" class="modal">
+  
+  <form class="modal-content animate" action="">
+     <div class="imgcontainer">
+      <span onclick="document.getElementById('ds-login').style.display='none'" class="close" title="Close Modal">&times;</span>
+    </div>
+
+    <div class="container" style="width:auto;">
+      <input type="text" placeholder="Enter Username" name="uname" required>
+      <input type="password" placeholder="Enter Password" name="psw" required>
+        
+      <button type="submit" >Login</button>
+      <input type="checkbox" checked="checked"><span>Remember me</span>
+      <span class="psw"><a href="#">Forgot password?</a></span>
+      <hr>
+      <p class="" style="margin-bottom:3px;overflow:hidden;text-align:center;color:#555;font-weight:bold;" data-reactid="20">OR</p>
+      <hr>
+      <div id="my-signin2"></div><br/>
+      <div class="fb-login-button" data-max-rows="1" data-width="306" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+      
+    
+    <span>Need an account? </span>
+    <button type="submit" >Sign up</button> 
+    </div> 
+      </form>
+</div>
+<!-- login with google  -->
+ <script>
+    function onSuccess(googleUser) {
+      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+    }
+    function onFailure(error) {
+      console.log(error);
+    }
+    function renderButton() {
+      gapi.signin2.render('my-signin2', {
+        'scope': 'profile email',
+        'width': 305,
+        'height': 40,
+        'longtitle': true,
+        'theme': 'dark',
+        'onsuccess': onSuccess,
+        'onfailure': onFailure
+      });
+    }
+  </script>
+  
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+<!--  Login with Facebook javascript  --> 
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1597895260252334',
+      cookie     : true,
+      xfbml      : true,
+      version    : 'v2.8'
+    });
+    FB.AppEvents.logPageView();   
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+ 

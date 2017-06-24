@@ -3,12 +3,14 @@
  */
 package com.app.dropshuttle.customer;
 
-import org.springframework.data.repository.CrudRepository;
+
+import org.springframework.stereotype.Repository;
 
 /**
  * @author Vish
  *
  */
-public interface UserRepository extends CrudRepository<UserDao,Integer>{
+@Repository
+public interface UserRepository {
 
 }

@@ -4,14 +4,14 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider,$loca
     .when("/", {
         templateUrl : "includes/homeTest.html"
     }).when("/login", {
-        templateUrl : "views/login.html"
+        templateUrl : "/dropshuttl_view/views/login.html"
     }).when("/error", {
-        templateUrl : "views/error.html"
+        templateUrl : "/dropshuttl_view/views/error.html"
     }).when("/signup", {
-        templateUrl : "views/signup.html",
+        templateUrl : "/dropshuttl_view/views/signup.html",
         controller : 'signUpCtrl'
     }).when("/addAccount", {
-        templateUrl : "/success.html",
+        templateUrl : "/dropshuttl_view/success.html",
         controller : 'signUpCtrl'
     })
     $locationProvider.html5Mode({
