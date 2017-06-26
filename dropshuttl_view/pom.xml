@@ -17,6 +17,13 @@
 			<groupId>com.app.dropshuttl</groupId>
 			<artifactId>dropshuttl_dao</artifactId>
 			<version>1.0.0-Release</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.app.dropshuttl</groupId>
+			<artifactId>MetroServicesAPI</artifactId>
+			<version>1.0.0-Release</version>
+			<scope>compile</scope>
 		</dependency> 
 	<!-- Servlet and JSP -->
 		<dependency>
