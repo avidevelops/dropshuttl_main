@@ -1,17 +1,18 @@
-var app = angular.module("myApp", ["ngRoute"]);
+var app = angular.module("myApp", ['ngRoute','ngResource']);
 app.config(['$routeProvider', '$locationProvider', function($routeProvider,$locationProvider) {
     $routeProvider
     .when("/", {
         templateUrl : "includes/homeTest.html"
     }).when("/login", {
-        templateUrl : "/dropshuttl_view/views/login.html"
+        templateUrl : "views/login.html",
+        controller : 'signUpCtrl'
     }).when("/error", {
-        templateUrl : "/dropshuttl_view/views/error.html"
+        templateUrl : "views/error.html"
     }).when("/signup", {
-        templateUrl : "/dropshuttl_view/views/signup.html",
+        templateUrl : "views/signup.html",
         controller : 'signUpCtrl'
     }).when("/addAccount", {
-        templateUrl : "/dropshuttl_view/success.html",
+        templateUrl : "success.html",
         controller : 'signUpCtrl'
     })
     $locationProvider.html5Mode({

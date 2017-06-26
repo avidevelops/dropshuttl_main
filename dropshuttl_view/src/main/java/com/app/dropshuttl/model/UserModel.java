@@ -1,6 +1,12 @@
 package com.app.dropshuttl.model;
 
-public class UserModel {
+import java.io.Serializable;
+
+public class UserModel  implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5388886317312799281L;
 	private String uname;
 	private String umailId;
 	private int umob;

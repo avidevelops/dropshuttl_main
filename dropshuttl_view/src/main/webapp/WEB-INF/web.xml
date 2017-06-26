@@ -1,21 +1,37 @@
-<web-app xmlns="http://java.sun.com/xml/ns/javaee" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
   <display-name>Dropshuttl view</display-name>
-  <!-- <welcome-file-list>
+  <welcome-file-list>
   <welcome-file>index.html</welcome-file>
-  </welcome-file-list> -->
-
+  </welcome-file-list>
+  <!-- <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/dropshuttl-context.xml</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener> -->
+<context-param>  
+    <param-name>spring.profiles.active</param-name>  
+    <param-value>dev</param-value>  
+</context-param>  
+<context-param>  
+    <param-name>spring.profiles.default</param-name>  
+    <param-value>dev</param-value>  
+</context-param>
+<context-param>  
+    <param-name>spring.liveBeansView.mbeanDomain</param-name>  
+    <param-value>dev</param-value>  
+</context-param>
 <servlet>
-		<servlet-name>dropshuttl_view</servlet-name>
+		<servlet-name>dropshuttl</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>dropshuttl_view</servlet-name>
-		<url-pattern>/dropshuttl_view/*</url-pattern>
+		<servlet-name>dropshuttl</servlet-name>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
 </web-app>

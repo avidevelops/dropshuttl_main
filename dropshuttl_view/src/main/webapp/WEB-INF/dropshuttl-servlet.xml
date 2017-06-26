@@ -1,0 +1,78 @@
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+		
+		
+		<context:annotation-config/>
+		
+       <context:component-scan base-package="com.app.dropshuttle.controller" />
+       <context:component-scan base-package="com.app.dropshuttl.customer.dao" />
+       <context:component-scan base-package="com.app.dropshuttl.customer.dao.impl" />
+       <context:component-scan base-package="com.app.dropshuttl.dto" />
+       <context:component-scan base-package="com.app.dropshuttl.customer" />
+Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+   <mvc:resources mapping="/resources/**" location="/resources/" />
+<mvc:default-servlet-handler />
+	<mvc:annotation-driven /> -->
+	
+	
+	<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd">
+ 
+	  <context:component-scan base-package="com.app.dropshuttl.controller" />
+	  <!-- <context:component-scan base-package="com.app.dropshuttl.customer.dao" />
+       <context:component-scan base-package="com.app.dropshuttl.customer.dao.impl" />
+       <context:component-scan base-package="com.app.dropshuttl.dto" />
+ 
+  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">  
+        <property name="driverClassName"  value="oracle.jdbc.driver.OracleDriver"></property>  
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:ORCL"></property>  
+        <property name="username" value="system"></property>  
+        <property name="password" value="admin"></property>  
+    </bean>  
+ 
+  <bean id="mysessionFactory"  class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">  
+        <property name="dataSource" ref="dataSource"></property>  
+          
+        <property name="packagesToScan" value="com.app.dropshuttl.dto" /> 
+          
+        <property name="hibernateProperties">  
+            <props>  
+                <prop key="hibernate.dialect">org.hibernate.dialect.Oracle9Dialect</prop>  
+                <prop key="hibernate.hbm2ddl.auto">update</prop>  
+                <prop key="hibernate.show_sql">true</prop>  
+                  
+            </props>  
+        </property>  
+    </bean>   -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".html" />
+	</bean>
+	<mvc:annotation-driven />
+	<mvc:default-servlet-handler />
+	</beans>
+<!-- </beans:beans> -->

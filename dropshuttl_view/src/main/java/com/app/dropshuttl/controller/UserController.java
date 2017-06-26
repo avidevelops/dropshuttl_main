@@ -1,37 +1,56 @@
 package com.app.dropshuttl.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.app.dropshuttl.model.UserModel;
-import com.app.dropshuttle.customer.UserService;
+import com.app.dropshuttle.admin.Application;
 
-@RestController
+@Controller
+@RequestMapping("/") 
 public class UserController {
-	
+	final static Logger logger = Logger.getLogger(UserController.class);
+	/*
 	@Autowired
-	UserService userService;
+	UserService userService;*/
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String printWelcome(ModelMap model) {
-
-		model.addAttribute("message", "Spring 3 MVC Hello World");
-		return "login";
+	@RequestMapping(value = "/login", method = RequestMethod.GET )
+	public ModelAndView printWelcome(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+		logger.debug("Inside pintwelcom");
+		model.addAttribute("message", "Spring 4 MVC Hello World");
+		return new ModelAndView("login",model);
 
 	}
 
-	@RequestMapping(value = "/dropshuttl_view/addUser", method = RequestMethod.POST)
-	public ResponseEntity<Void> insertUser(@ModelAttribute("user") UserModel user)
+	@RequestMapping(value = "/addUser", method = RequestMethod.POST,consumes = {"application/json;charset=UTF-8"}, produces={"application/json;charset=UTF-8"})
+	public @ResponseBody  UserModel insertUser(@RequestBody UserModel user)
 			 {
+		logger.debug("Inside pintwelcom "+user);
 		System.out.println("User "+user);
+		return user;
+			 }
+		
+	
+	@RequestMapping(value = "/testcontrol", method = RequestMethod.GET)
+	public ModelAndView testInsert()
+			 {
+		return new ModelAndView("success");
 		   
-		return new ResponseEntity<Void>(HttpStatus.OK);
-				
-	}
+		
+					}
 	
 }

@@ -1,4 +1,4 @@
-angular.module('dialogDemo3', ['ngMaterial'])
+/*angular.module('dialogDemo3', ['ngMaterial'])
   .config(function ($mdThemingProvider) {
     $mdThemingProvider.theme('red')
       .primaryPalette('red');
@@ -46,4 +46,4 @@ angular.module('dialogDemo3', ['ngMaterial'])
       $mdDialog.hide(answer);
     };
   }
-});
+});*/
