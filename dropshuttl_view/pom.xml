@@ -16,7 +16,7 @@
 	  <dependency>
 			<groupId>com.app.dropshuttl</groupId>
 			<artifactId>dropshuttl_dao</artifactId>
-			<version>1.0.0-Release</version>
+			<version>1.0</version>
 		</dependency>
 		
 		<dependency>

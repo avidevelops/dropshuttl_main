@@ -1,0 +1,4 @@
+insert into customer (id, email, first_name, last_name, password, phone, name) values (default, 'test@test.com', 'First', 'Last', 'test', '1234567890', 'testtest')
+insert into customer (id, email, first_name, last_name, password, phone, name) values (default, 'test1@test.com', 'First', 'Last', 'test', '1234567890', 'adminUser')
+insert into customer (id, email, first_name, last_name, password, phone, name) values (default, 'test1@test.com', 'First', 'Last', 'test', '1234567890', 'shopOwner')
+insert into customer (id, email, first_name, last_name, password, phone, name) values (default, 'charlie@packtpub.com', 'Charlie', 'Bucket', 'charlie', '1234567890', 'charlie')

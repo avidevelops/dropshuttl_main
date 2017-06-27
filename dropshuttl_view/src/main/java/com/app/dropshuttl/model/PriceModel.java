@@ -13,7 +13,7 @@ public class PriceModel {
 	public static void main(String [] arg){
 		
 		try {
-			double fare = new PriceModel().getMetroFair(28.4743879, 77.5039904, 28.349486, 77.065916);
+			double fare = new PriceModel().getMetroFair(28.608139, 77.294747, 28.607641, 77.295500);
 			System.out.println(fare);
 		} catch (NumberFormatException | StationNotFound | SQLException e) {
 			// TODO Auto-generated catch block
@@ -23,10 +23,13 @@ public class PriceModel {
 	
 	public int getMetroFair(double fromLatitude, double fromLongitude, double toLatitude, double toLongitude) throws NumberFormatException, StationNotFound, SQLException{
 		MetroApplication app = new MetroApplication();
-
+		int price;
 		ArrayList<Object> toStationData = app.getNearestMetroStationData(toLatitude, toLongitude);
 		ArrayList<Object> fromStationData = app.getNearestMetroStationData(fromLatitude, fromLongitude);
-		
+		if (fromStationData.get(0).toString().equals(toStationData.get(0).toString())) {
+			price = 30;
+			return price;
+		}
 		Result result = app.getBestMetroRoute(fromStationData.get(0).toString(), toStationData.get(0).toString());
 		int fare =  Integer.parseInt(result.getFare());
 		
@@ -35,7 +38,11 @@ public class PriceModel {
 		
 		int onFootDistance = toOnFootDistance + fromOnFootDistance;
 		
-		int price = onFootDistance*10 + fare;
+		price = onFootDistance*10 + fare;
+		if (price<30) {
+			price = 30;
+		}
+		
 		
 		return price;
 	}
