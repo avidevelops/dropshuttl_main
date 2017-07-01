@@ -9,7 +9,7 @@ public class UserModel  implements Serializable{
 	private static final long serialVersionUID = -5388886317312799281L;
 	private String uname;
 	private String umailId;
-	private int umob;
+	private String umob;
 	private String pass;
 	public String getUname() {
 		return uname;
@@ -23,10 +23,10 @@ public class UserModel  implements Serializable{
 	public void setUmailId(String umailId) {
 		this.umailId = umailId;
 	}
-	public int getUmob() {
+	public String getUmob() {
 		return umob;
 	}
-	public void setUmob(int umob) {
+	public void setUmob(String umob) {
 		this.umob = umob;
 	}
 	public String getPass() {

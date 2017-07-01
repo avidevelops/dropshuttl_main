@@ -32,6 +32,12 @@ public class UserDaoImpl implements UserDAO {
     public void addUser(UserMast user) {
         this.entityManager.persist(user);
     }
+	
+	@Override
+	public boolean getUserByNumber(String umob) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 //	public void addUser(UserMast user) {
 //		Session session = this.sessionFactory.getCurrentSession();

@@ -11,7 +11,9 @@ import com.app.dropshuttl.dto.UserMast;
  */
 public interface UserDAO {
 	public void addUser(UserMast user);
-	
-	
+
+	boolean getUserByNumber(String umob);
+
+
 
 }

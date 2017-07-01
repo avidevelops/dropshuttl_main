@@ -38,10 +38,7 @@ public class UserController {
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST,consumes = {"application/json;charset=UTF-8"}, produces={"application/json;charset=UTF-8"})
 	public @ResponseBody  UserModel insertUser(@RequestBody UserModel user)
 	{
-		ModelMapper mapper = new ModelMapper();
-		mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-		UserMast userMast = mapper.map(user, UserMast.class);
-		userService.addUser(userMast);
+		userService.addUser(user);
 		logger.debug("Inside pintwelcom "+user);
 		System.out.println("User "+user);
 		return user;
