@@ -13,9 +13,6 @@ public class UserMast implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id")
-    private int id;  
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="user_id")
     private int uid;
 	@Column(name="uname")	
@@ -23,7 +20,7 @@ public class UserMast implements Serializable {
 	@Column(name="umailid")
 	private String umailId;
 	@Column(name="umob")
-	private int umob;
+	private String umob;
 	@Column(name="usocialfb")
 	private String usocialFB;
 	@Column(name="usocialGID")
@@ -42,12 +39,7 @@ public class UserMast implements Serializable {
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 	public int getUid() {
 		return uid;
 	}
@@ -66,10 +58,10 @@ public class UserMast implements Serializable {
 	public void setUmailId(String umailId) {
 		this.umailId = umailId;
 	}
-	public int getUmob() {
+	public String getUmob() {
 		return umob;
 	}
-	public void setUmob(int umob) {
+	public void setUmob(String umob) {
 		this.umob = umob;
 	}
 	public String getUsocialFB() {
