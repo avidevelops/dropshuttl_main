@@ -14,9 +14,9 @@ public class UserMast implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="user_id")
-    private int uid;
+    private long uid;
 	@Column(name="uname")	
-	private String uname;
+	private String name;
 	@Column(name="umailid")
 	private String umailId;
 	@Column(name="umob")
@@ -40,17 +40,17 @@ public class UserMast implements Serializable {
 		this.pass = pass;
 	}
 	
-	public int getUid() {
+	public long getUid() {
 		return uid;
 	}
-	public void setUid(int uid) {
+	public void setUid(long uid) {
 		this.uid = uid;
 	}
 	public String getUname() {
-		return uname;
+		return name;
 	}
 	public void setUname(String uname) {
-		this.uname = uname;
+		this.name = uname;
 	}
 	public String getUmailId() {
 		return umailId;

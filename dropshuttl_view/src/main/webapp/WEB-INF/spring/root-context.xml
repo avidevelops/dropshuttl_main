@@ -6,8 +6,8 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
 	
-    <!-- Imports application context XML that's included in the chocolatestore-model artifact -->
+    <!-- Imports application context XML that's included in the drpshuttl artifact -->
     <import resource="classpath*:META-INF/spring/applicationContext.xml"/>
-	
+	<import resource="classpath*:META-INF/spring/webSecurityConfig.xml"/>
 
 </beans>

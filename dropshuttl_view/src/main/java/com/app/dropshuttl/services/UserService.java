@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.app.dropshuttl.customer.dao.impl.UserDaoImpl;
 import com.app.dropshuttl.dto.UserMast;
-import com.app.dropshuttl.model.UserModel;
 import com.app.dropshuttl.security.PasswordSecurity;
 
 @Transactional
@@ -22,7 +21,7 @@ public class UserService {
 	final static Logger logger = Logger.getLogger(UserService.class);
 	boolean isUserAreadyPresent;
 
-	public void addUser(UserModel user)
+	public void addUser(UserMast user)
 	{
 
 		if(user !=null)

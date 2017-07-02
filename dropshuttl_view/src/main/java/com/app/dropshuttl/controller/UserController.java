@@ -4,8 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.app.dropshuttl.dto.UserMast;
-import com.app.dropshuttl.model.UserModel;
 import com.app.dropshuttl.services.UserService;
 
 @Controller
@@ -27,16 +24,16 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET )
-	public ModelAndView printWelcome(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
-		logger.debug("Inside pintwelcom");
-		model.addAttribute("message", "Spring 4 MVC Hello World");
-		return new ModelAndView("login",model);
-
-	}
+//	@RequestMapping(value = "/login", method = RequestMethod.GET )
+//	public ModelAndView printWelcome(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+//		logger.debug("Inside pintwelcom");
+//		model.addAttribute("message", "Spring 4 MVC Hello World");
+//		return new ModelAndView("login",model);
+//
+//	}
 
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST,consumes = {"application/json;charset=UTF-8"}, produces={"application/json;charset=UTF-8"})
-	public @ResponseBody  UserModel insertUser(@RequestBody UserModel user)
+	public @ResponseBody  UserMast insertUser(@RequestBody UserMast user)
 	{
 		userService.addUser(user);
 		logger.debug("Inside pintwelcom "+user);

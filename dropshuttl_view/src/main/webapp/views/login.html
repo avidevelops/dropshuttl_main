@@ -5,14 +5,14 @@
 
 <div id="ds-login" class="modal">
   
-  <form class="modal-content animate" action="">
+  <form class="modal-content animate" action="j_spring_security_check" method="post">
      <div class="imgcontainer">
       <span onclick="document.getElementById('ds-login').style.display='none'" class="close" title="Close Modal">&times;</span>
     </div>
 
     <div class="container" style="width:auto;">
-      <input type="text" placeholder="Enter Username" name="uname" required>
-      <input type="password" placeholder="Enter Password" name="psw" required>
+      <input type="text" placeholder="Enter Username" name="j_username" required >
+      <input type="password" placeholder="Enter Password" name="j_password" required>
         
       <button type="submit" >Login</button>
       <input type="checkbox" checked="checked"><span>Remember me</span>
