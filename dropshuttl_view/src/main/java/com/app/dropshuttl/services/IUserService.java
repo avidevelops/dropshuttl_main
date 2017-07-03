@@ -6,11 +6,11 @@ public interface IUserService {
 
     public UserModel findByName(final String uname);
 
-//    public UserMast findById(final long id);
-//
-//    // write
-//
-//    public UserMast create(final UserMast entity);
-//
-//    public void update(final UserMast entity);
+    public UserModel findById(final long id);
+
+    // write
+
+    public UserModel create(final UserModel entity);
+
+    public void update(final UserModel entity);
 }

@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import com.app.dropshuttl.dto.UserMast;
 
-public interface IUserJpaDao extends JpaRepository<UserMast, Long>, JpaSpecificationExecutor<UserMast> {
-	 UserMast findByName(final String name);
+public interface IUserDao extends JpaRepository<UserMast, Long>, JpaSpecificationExecutor<UserMast> {
+	 UserMast findByUname(final String name);
 }

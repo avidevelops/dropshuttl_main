@@ -1,42 +1,58 @@
 package com.app.dropshuttl.services;
 
-import org.apache.log4j.Logger;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.app.dropshuttl.customer.dao.impl.UserDaoImpl;
+import com.app.dropshuttl.customer.dao.IUserDao;
 import com.app.dropshuttl.dto.UserMast;
+import com.app.dropshuttl.model.UserModel;
+import com.app.dropshuttl.modelmapper.DtoMapper;
 import com.app.dropshuttl.security.PasswordSecurity;
 
 @Transactional
 @Service
-public class UserService {
-
+public class UserService implements IUserService {
+	
 	@Autowired
-	UserDaoImpl userDaoImpl;
+	IUserDao dao;
 
-	final static Logger logger = Logger.getLogger(UserService.class);
-	boolean isUserAreadyPresent;
+	@Override
+	public UserModel findByName(String uname) {
+		// TODO Auto-generated method stub
+		UserMast user = dao.findByUname(uname);	
+		UserModel userModel = DtoMapper.map(user, UserModel.class);
+		return userModel;
+	}
 
-	public void addUser(UserMast user)
-	{
+//	@Override
+//	public UserModel findById(long id) {
+//		// TODO Auto-generated method stub
+//		return dao.findOne(id);
+//	}
 
-		if(user !=null)
-			isUserAreadyPresent=userDaoImpl.getUserByNumber(user.getUmob());
-		if(!isUserAreadyPresent){
-			ModelMapper mapper = new ModelMapper();
-			mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+	@Override
+	public UserModel create(UserModel entity) {
+		// TODO Auto-generated method stub		
+		UserMast userEntity = DtoMapper.map(entity, UserMast.class);
+		userEntity.setPass(PasswordSecurity.encrypt(entity.getPass(), entity.getUname()));
+		userEntity = dao.save(userEntity);
+		UserModel userModel = DtoMapper.map(userEntity, UserModel.class);
+		return userModel;
+	}
 
-			UserMast userMast = mapper.map(user, UserMast.class);
-			userMast.setPass(PasswordSecurity.encrypt(user.getPass(), user.getUname()));
-			userDaoImpl.addUser(userMast);
-		}else
-		{
-			logger.error("USer Is already present !!");
-		}
+	@Override
+	public void update(UserModel entity) {
+		UserMast userEntity = DtoMapper.map(entity, UserMast.class);
+		dao.save(userEntity);
+		
+	}
+
+	@Override
+	public UserModel findById(long id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

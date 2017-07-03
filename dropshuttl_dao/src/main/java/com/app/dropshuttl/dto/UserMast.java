@@ -16,7 +16,7 @@ public class UserMast implements Serializable {
 	@Column(name="user_id")
     private long uid;
 	@Column(name="uname")	
-	private String name;
+	private String uname;
 	@Column(name="umailid")
 	private String umailId;
 	@Column(name="umob")
@@ -47,10 +47,10 @@ public class UserMast implements Serializable {
 		this.uid = uid;
 	}
 	public String getUname() {
-		return name;
+		return uname;
 	}
 	public void setUname(String uname) {
-		this.name = uname;
+		this.uname = uname;
 	}
 	public String getUmailId() {
 		return umailId;

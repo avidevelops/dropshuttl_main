@@ -14,11 +14,10 @@ import com.app.dropshuttl.security.PasswordSecurity;
 public class CustomUserService implements UserDetailsService {
 
 	@Autowired
-	IUserService custUserService;
+	IUserService userService;
+	
 	public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-		UserModel user = custUserService.findByName(username);
-		
-		
-		return new User(user.getUname(), PasswordSecurity.decrypt(user.getPass(), user.getUmob()), user.getAuthorities());
+		UserModel user = userService.findByName(username);
+		return new User(user.getUname(), PasswordSecurity.decrypt(user.getPass(), user.getUname()), user.getAuthorities());
 	}
 }
