@@ -27,8 +27,6 @@ public class RunTimeAPI
     try {
 		return paramMetroDbHelper.fetchData("RunTime", new String[] { paramString2 }, paramString1);
 	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
 		return null;
 	}
   }

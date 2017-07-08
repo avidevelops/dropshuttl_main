@@ -1,12 +1,10 @@
 package com.app.dropshuttl.metro.api;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedList;
 
 public class StationRoute
 {
@@ -40,53 +38,66 @@ public class StationRoute
     
     private String calcualteTime(final String s, final String s2, final Station station, final Station station2, String s3, final String s4) throws SQLException {
         MetroDbHelper.getInstance().openDataBase();
-        s3 = "0";
         final ResultSet record = new RunTimeAPI().getRecord(MetroDbHelper.getInstance(), s, s2);
         ResultSet cursor;
-        String s5;
-        if (record != null && !record.isBeforeFirst()) {
-            cursor = record;
-            s5 = s3;
-           // if (record.getCount() == 0) {
+        String s5 = "0";
+        if (record != null && record.isBeforeFirst()) {
+        	record.next();
+            s5 = record.getString(1);
             record.close();
-            final ResultSet cursor2 = cursor = new AirportRunTimeAPI().getRecord(MetroDbHelper.getInstance(), s, s2);
-            s5 = s3;
-            if (cursor2 != null) {
-                cursor = cursor2;
-                s5 = s3;
-                if (cursor2.isBeforeFirst()) {
-                	cursor2.next();
-                    s5 = cursor2.getString(1);
-                    cursor = cursor2;
-                }
-            }
-            //}
-        }
-        else {
-            cursor = record;
-            s5 = s3;
-            if (record != null) {
-                cursor = record;
-                s5 = s3;
-                if (record.isBeforeFirst()) {
-                	record.next();
-                    if (record.getString(1).equals(s2)) {
-                        record.close();
-                        cursor = new AirportRunTimeAPI().getRecord(MetroDbHelper.getInstance(), s, s2);
-                        cursor.next();
-                        s5 = cursor.getString(1);
-                    }
-                    else {
-                        s5 = new StringBuilder(String.valueOf(2)).toString();
-                        cursor = record;
-                    }
-                }
-            }
-        }
-        cursor.close();
+		}else{
+			cursor = new AirportRunTimeAPI().getRecord(MetroDbHelper.getInstance(), s, s2);
+            cursor.next();
+            s5 = cursor.getString(1);
+            cursor.close();
+		}
+
         MetroDbHelper.getInstance().close();
         return this.isTime(s5);
     }
+    
+//  ResultSet cursor;
+//  String s5;
+//  if (record != null && !record.isBeforeFirst()) {
+//      cursor = record;
+//      s5 = s3;
+//     // if (record.getCount() == 0) {
+//      record.close();
+//      final ResultSet cursor2 = cursor = new AirportRunTimeAPI().getRecord(MetroDbHelper.getInstance(), s, s2);
+//      s5 = s3;
+//      if (cursor2 != null) {
+//          cursor = cursor2;
+//          s5 = s3;
+//          if (cursor2.isBeforeFirst()) {
+//          	cursor2.next();
+//              s5 = cursor2.getString(1);
+//              cursor = cursor2;
+//          }
+//      }
+//      //}
+//  }
+//  else {
+//      cursor = record;
+//      s5 = s3;
+//      if (record != null) {
+//          cursor = record;
+//          s5 = s3;
+//          if (record.isBeforeFirst()) {
+//          	record.next();
+//              if (record.getString(1).equals(s2)) {
+//                  record.close();
+//                  cursor = new AirportRunTimeAPI().getRecord(MetroDbHelper.getInstance(), s, s2);
+//                  cursor.next();
+//                  s5 = cursor.getString(1);
+//              }
+//              else {
+//                  s5 = new StringBuilder(String.valueOf(2)).toString();
+//                  cursor = record;
+//              }
+//          }
+//      }
+//  }
+  //cursor.close();
     
     private String calcualteValue(final ParentAPI parentAPI, final String s, final String s2) throws SQLException {
         final ResultSet record = parentAPI.getRecord(MetroDbHelper.getInstance(), s, s2);
