@@ -41,21 +41,21 @@ h6,
 .h6 {
   color: #666666;
 }
-header .navbar-default {
+.navbar-default {
   background: none;
   border: none;
   padding-top: 40px;
   padding-bottom: 20px;
-  -webkit-transition: all 0.25s ease-in-out;
+  /* -webkit-transition: all 0.25s ease-in-out;
   -moz-transition: all 0.25s ease-in-out;
   -ms-transition: all 0.25s ease-in-out;
   -o-transition: all 0.25s ease-in-out;
-  transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out; */
 }
-header .navbar-default ul.navbar-nav {
-  padding-top: 55px;
+ul.navbar-nav {
+  padding-top: 15px;
 }
-header .navbar-default ul.navbar-nav li a {
+ul.navbar-nav li a {
   text-transform: capitalize;
   font-weight: 400;
   font-size: 16px;
@@ -66,7 +66,7 @@ header .navbar-default ul.navbar-nav li a {
   -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
 }
-header .navbar-default ul.navbar-nav li a:after {
+ul.navbar-nav li a:after {
   content: '';
   width: 32px;
   background: none;
@@ -87,17 +87,17 @@ header .navbar-default ul.navbar-nav li a:after {
   -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
 }
-header .navbar-default ul.navbar-nav li a:hover {
+ul.navbar-nav li a:hover {
   -webkit-transition: all 0.25s ease-in-out;
   -moz-transition: all 0.25s ease-in-out;
   -ms-transition: all 0.25s ease-in-out;
   -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
 }
-header .navbar-default ul.navbar-nav li a:hover:after {
+ul.navbar-nav li a:hover:after {
   background: #ffffff;
 }
-header .navbar-default ul.navbar-nav li a.getApp {
+ul.navbar-nav li a.getApp {
   -webkit-border-radius: 5em;
   -moz-border-radius: 5em;
   -ms-border-radius: 5em;
@@ -109,13 +109,13 @@ header .navbar-default ul.navbar-nav li a.getApp {
   -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
 }
-header .navbar-default ul.navbar-nav li a.getApp:after {
+ul.navbar-nav li a.getApp:after {
   display: none;
 }
-header .navbar-default ul.navbar-nav li a:focus {
+ul.navbar-nav li a:focus {
   color: #ffffff;
 }
-header .navbar-default .navbar-brand {
+.navbar-brand {
   height: auto;
   padding: 0;
 }
@@ -154,7 +154,7 @@ header .navbar-default.scrolled ul.navbar-nav {
   bottom: -70px;
 }
 .section-heading {
-  margin: 60px 0 80px;
+  margin: 110px 0 80px;
   text-align: center;
 }
 .section-heading h1 {
@@ -503,7 +503,7 @@ section::after {
   pointer-events: none;
   overflow: hidden;
 }
-.carousel-fade .carousel-inner .item {
+/* .carousel-fade .carousel-inner .item {
   opacity: 0;
   transition-property: opacity;
 }
@@ -522,7 +522,7 @@ section::after {
 }
 .carousel-fade .carousel-control {
   z-index: 2;
-}
+} */
 .tp-caption {
   font-family: 'Lato', Arial !important;
   -webkit-font-smoothing: antialiased;
@@ -625,10 +625,10 @@ form textarea.form-control {
   .contact-details {
     margin-top: 20px;
   }
-  header .navbar-default {
+.navbar-default {
     padding: 20px;
   }
-  header .navbar-default .navbar-toggle {
+.navbar-default .navbar-toggle {
     margin-top: 0px;
     margin-right: 0px;
     background: none;
@@ -640,19 +640,19 @@ form textarea.form-control {
     -o-border-radius: 5em;
     border-radius: 5em;
   }
-  header .navbar-default .navbar-toggle:hover,
-  header .navbar-default .navbar-toggle:focus {
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
     background: none;
   }
-  header .navbar-default ul.navbar-nav {
+.navbar-default ul.navbar-nav {
     padding-top: 0;
     margin: 0;
   }
-  header .navbar-default ul.navbar-nav li a {
+.navbar-default ul.navbar-nav li a {
     padding: 10px;
     text-align: center;
   }
-  header .navbar-default ul.navbar-nav li a.getApp {
+.navbar-default ul.navbar-nav li a.getApp {
     background: none !important;
     -webkit-border-radius: 0em;
     -moz-border-radius: 0em;
@@ -660,10 +660,10 @@ form textarea.form-control {
     -o-border-radius: 0em;
     border-radius: 0em;
   }
-  header .navbar-default .navbar-collapse {
+.navbar-default .navbar-collapse {
     border-color: transparent;
   }
-  header .navbar-default.scrolled .navbar-collapse {
+.navbar-default.scrolled .navbar-collapse {
     border-color: transparent;
   }
   header .navbar-default.scrolled ul.navbar-nav {
@@ -760,11 +760,11 @@ header {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#66cdcc, endColorstr=#336799, GradientType=1);
   /* IE6-9 fallback on horizontal gradient */
 }
-header .navbar-default ul.navbar-nav li a {
+.navbar-default ul.navbar-nav li a {
   color: #ffffff;
   background: none;
 }
-header .navbar-default ul.navbar-nav li a.getApp {
+.navbar-default ul.navbar-nav li a.getApp {
   color: #3c79b4;
   background: #ffffff;
   /* Old browsers */
@@ -783,7 +783,7 @@ header .navbar-default ul.navbar-nav li a.getApp {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff, endColorstr=#e0e0e0, GradientType=1);
   /* IE6-9 fallback on horizontal gradient */
 }
-header .navbar-default ul.navbar-nav li a.getApp:hover {
+.navbar-default ul.navbar-nav li a.getApp:hover {
   color: #4081bf;
   background: #ffffff;
   /* Old browsers */
@@ -807,7 +807,7 @@ header .navbar-default ul.navbar-nav li a.getApp:hover {
   -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
 }
-header .navbar-default ul.navbar-nav li a:hover {
+.navbar-default ul.navbar-nav li a:hover {
   color: #ffffff;
   -webkit-transition: all 0.25s ease-in-out;
   -moz-transition: all 0.25s ease-in-out;
@@ -1068,24 +1068,24 @@ form .form-control:focus {
   color: #999999;
 }
 @media screen and (max-width: 640px) {
-  header .navbar-default .navbar-toggle:hover,
-  header .navbar-default .navbar-toggle:focus {
+  .navbar-default .navbar-toggle:hover,
+  .navbar-default .navbar-toggle:focus {
     background: none;
   }
-  header .navbar-default ul.navbar-nav li a {
+  .navbar-default ul.navbar-nav li a {
     color: #ffffff;
     border-bottom: 1px solid #376fa4;
   }
-  header .navbar-default ul.navbar-nav li a.getApp {
+  .navbar-default ul.navbar-nav li a.getApp {
     color: #ffffff;
   }
-  header .navbar-default ul.navbar-nav li a:after {
+  .navbar-default ul.navbar-nav li a:after {
     display: none;
   }
-  header .navbar-default ul.navbar-nav li a:hover {
+  .navbar-default ul.navbar-nav li a:hover {
     color: #66cdcc;
   }
-  header .navbar-default .navbar-collapse {
+  .navbar-default .navbar-collapse {
     background: #336799;
   }
   header .navbar-default.scrolled {
@@ -1101,3 +1101,17 @@ form .form-control:focus {
 .pre-loader {
   background: #336799;
 }
+
+.tp-banner-container{
+	max-height: none; height: 760px !important;
+	  background: linear-gradient(-45deg, rgb(102, 205, 204) 0%, rgb(51, 103, 153) 100%);
+	  
+}
+
+.tp-banner-container li{
+	z-index:7 !important;
+}
+
+/* .tp-banner-container .tp-banner{
+	border:none !important;
+} */

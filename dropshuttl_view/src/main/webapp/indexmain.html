@@ -21,7 +21,40 @@
     <link rel="stylesheet" href="assets/css/slick.css">
     <link rel="stylesheet" href="assets/js/rs-plugin/css/settings.css">
 
-    <link rel="stylesheet" href="assets/css/styles.css">
+   <link rel="stylesheet" href="assets/css/styles.css">
+   
+   <style type="text/css">
+    /* Add some padding on document's body to prevent the content
+    to go underneath the header and footer */
+    /* body{        
+        padding-top: 60px;
+        padding-bottom: 40px;
+    } */
+    .fixed-header, .fixed-footer{
+        width: 100%;
+        position: fixed;        
+        background: linear-gradient(-45deg, #66cdcc 0%, #336799 100%);
+        padding: 25px 0;
+        /* color: #fff; */
+    }
+    .fixed-header{
+        top: 0;
+        z-index: 9;
+    }
+    .fixed-footer{
+        bottom: 0;
+    }
+    .container{
+        width: 80%;
+        margin: 0 auto; /* Center the DIV horizontally */
+    }
+    nav a{
+        color: #fff;
+        text-decoration: none;
+        padding: 7px 25px;
+        display: inline-block;
+    }
+</style>
 
 
     <script type="text/javascript" src="assets/js/modernizr.custom.32033.js"></script>
@@ -44,11 +77,11 @@
             </div>
         </div>
     </div>
-   
-    <header>
-        
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-                <div class="container">
+    
+     <div class="navbar navbar-default fixed-header">
+        <div class="container">
+            <nav>
+            	<!-- <div class="container"> -->
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -73,34 +106,45 @@
                             </li>
                         </ul>
                     </div>
-                    <!-- /.navbar-collapse -->
+                
                 </div>
-                <!-- /.container-->
-        </nav>
-
-        
-        <!--RevSlider-->
-       <div class="tp-banner-container">
-            <div class="tp-banner" style="border:solid black 2px" >
+                
+  				<!-- <ul class ="nav navbar-nav navbar-left">
+  				<li><a class="navbar-brand" href="index.html">
+                            <img src="assets/img/freeze/logo.png" alt="" class="logo">
+                        </a></li>
+  				</ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#about">about</a>
+                    </li>
+                    <li><a href="#features">pricing</a>
+                    </li>
+                    <li><a href="#reviews">reviews</a>
+                    </li>
+                    <li><a href="#contact">contact us</a>
+                    </li>
+                </ul> -->
+            </nav>
+        </div>
+    </div>
+    
+    <div class="tp-banner-container">
+            <div class="tp-banner" >
                 <ul>
-                    <!-- SLIDE  -->
                     <li data-transition="fade" data-slotamount="7">
-                        <!-- MAIN IMAGE -->
                         <img src="assets/img/transparent.png"  alt="slidebg1"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-                        <!-- LAYERS -->
-                        <!-- LAYER NR. 1 -->
-                        <div class="tp-caption lfl fadeout hidden-xs"
+                        <div class="tp-caption lfl"
                             data-x="left"
                             data-y="bottom"
                             data-hoffset="30"
-                            data-voffset="0"
+                            data-voffset="-120"
                             data-speed="500"
                             data-start="700"
                             data-easing="Power4.easeOut" >
                             <img src="assets/img/freeze/Slides/hand-freeze.png" alt="">
                         </div>
-<!--
-                        <div class="tp-caption lfl fadeout visible-xs"
+
+                       <!--  <div class="tp-caption lfl fadeout visible-xs"
                             data-x="left"
                             data-y="center"
                             data-hoffset="700"
@@ -109,21 +153,21 @@
                             data-start="700"
                             data-easing="Power4.easeOut">
                             <img src="assets/img/freeze/iphone-freeze.png" alt="">
-                        </div>-->
+                        </div> -->
 
-                        <div class="tp-caption large_white_bold sft" data-x="550" data-y="center" data-hoffset="0" data-voffset="-80" data-speed="500" data-start="1200" data-easing="Power4.easeOut">
+                        <div class="tp-caption large_white_bold sft" data-x="700" data-y="center" data-hoffset="0" data-voffset="0" data-speed="500" data-start="1200" data-easing="Power4.easeOut">
                             Drop Shuttle
                         </div>
 
-                        <div class="tp-caption large_white_light sfb" data-x="550" data-y="center" data-hoffset="0" data-voffset="0" data-speed="1000" data-start="1500" data-easing="Power4.easeOut">
+                        <div class="tp-caption large_white_light sfb" data-x="700" data-y="center" data-hoffset="0" data-voffset="80" data-speed="1000" data-start="1500" data-easing="Power4.easeOut">
                             Get It Delivered
                         </div>
 
-                        <div class="tp-caption sfb hidden-xs" data-x="550" data-y="center" data-hoffset="0" data-voffset="85" data-speed="1000" data-start="1700" data-easing="Power4.easeOut">
+                        <!-- <div class="tp-caption sfb" data-x="550" data-y="center" data-hoffset="0" data-voffset="85" data-speed="1000" data-start="1700" data-easing="Power4.easeOut">
                             <a href="#about" class="btn btn-primary inverse btn-lg">LEARN MORE</a>
-                        </div>
-                        <div class="tp-caption sfr hidden-xs" data-x="730" data-y="center" data-hoffset="0" data-voffset="85" data-speed="1500" data-start="1900" data-easing="Power4.easeOut">
-                            <a href="#signIn" class="btn btn-default btn-lg">SIGN IN</a>
+                        </div> -->
+                        <div class="tp-caption sfb" data-x="700" data-y="center" data-hoffset="0" data-voffset="200" data-speed="1500" data-start="1900" data-easing="Power4.easeOut">
+                            <a href="#signIn" class="btn btn-primary inverse btn-lg">SIGN IN</a>
                         </div>
 
                     </li>
@@ -132,14 +176,11 @@
                 </ul>
             </div>
         </div>
-
-
-    </header>
+    
+   
 
 
     <div class="wrapper">
-
-        
 
         <section id="about">
             <div class="container">
@@ -165,6 +206,7 @@
                             <p>Your Item is safe, confidential and even insured with Drop Shuttle.</p>
                         </div>
                     </div>
+                    <div class="clearfix visible-xs"></div>
                     <div class="col-md-3 col-sm-3 col-xs-6" >
                         <div class="about-item scrollpoint sp-effect5">
                             <i class="fa fa-users fa-2x"></i>
