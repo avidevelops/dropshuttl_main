@@ -142,7 +142,7 @@ header .navbar-default.scrolled ul.navbar-nav {
   padding-top: 15px;
 }
 .scrollpoint {
-  opacity: 0;
+  opacity: 1;
 }
 .scrollpoint.active {
   opacity: 1 \0;
@@ -1105,13 +1105,52 @@ form .form-control:focus {
 .tp-banner-container{
 	max-height: none; height: 760px !important;
 	  background: linear-gradient(-45deg, rgb(102, 205, 204) 0%, rgb(51, 103, 153) 100%);
+	  padding-top:150px;
 	  
 }
 
 .tp-banner-container li{
 	z-index:7 !important;
+	    
 }
 
+
+.tp-banner-container li .tp-caption {
+	float: left;
+    padding-right: 45px;
+}
 /* .tp-banner-container .tp-banner{
 	border:none !important;
 } */
+
+/* Add some padding on document's body to prevent the content
+    to go underneath the header and footer */
+    /* body{        
+        padding-top: 60px;
+        padding-bottom: 40px;
+    } */
+    .fixed-header, .fixed-footer{
+        width: 100%;
+        position: fixed;        
+        background: linear-gradient(-45deg, #66cdcc 0%, #336799 100%);
+        padding: 25px 0;
+        /* color: #fff; */
+    }
+    .fixed-header{
+        top: 0;
+        z-index: 9;
+    }
+    .fixed-footer{
+        bottom: 0;
+    }
+    .container{
+        width: 80%;
+        margin: 0 auto; /* Center the DIV horizontally */
+    }
+    nav a{
+        color: #fff;
+        text-decoration: none;
+        padding: 7px 25px;
+        display: inline-block;
+    }
+
