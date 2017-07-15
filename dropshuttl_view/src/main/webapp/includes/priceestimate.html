@@ -5,10 +5,21 @@
                     <div class="divider"></div>
                     <p>Get the estimate of your delivery</p>
                 </div>
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2 scrollpoint sp-effect2">
-                        
-                    </div>
-                </div>
-            </div>
+		<div class="row">
+			<input type="text" placeholder="From" id="from" data-ng-model="mfrom">
+			<input type="text" placeholder="To" id="to" data-ng-model="mto">
+			<input type="button" value="Estimate"
+				data-ng-click="findDistance(mfrom,mto)">
+
+		</div>
+		<div id="right-panel">
+			<div>
+				<strong>Results</strong>
+			</div>
+			<div id="output"></div>
+		</div>
+		<div id="map"></div>
+		<br>
+	</div>
+            
         </section>
