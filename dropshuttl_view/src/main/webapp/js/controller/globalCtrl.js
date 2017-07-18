@@ -105,7 +105,7 @@ app.controller('globalctrl', function($scope, $http,$location) {
        }
        markersArray = [];
      }
-   
+        
 $scope.booknowdetails=function(){
 	console.log("inside book now");
 	$location.path("booknow");

@@ -60,5 +60,37 @@
        
 
        <home-contact-us></home-contact-us>
-       
-              
+   <!-- login with google  -->
+ <script>
+    function onSuccess(googleUser) {
+      console.log('Logged in as: ' + googleUser);
+      var id_token = googleUser.getAuthResponse().id_token;
+      
+     console.log('ID: ' + id_token);
+     var xhr = new XMLHttpRequest();
+     xhr.open('POST', '/dropshuttl/tokensignin');
+     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+     xhr.onload = function() {
+       console.log('Signed in as: ' + xhr.responseText);
+     };
+     xhr.send('idtoken=' + id_token);
+     window.location.href = "/dropshuttl/booknow?id_token="+googleUser.getBasicProfile().getName();
+   
+    }
+   
+    function onFailure(error) {
+      console.log(error);
+    }
+    function renderButton() {
+      gapi.signin2.render('my-signin2', {
+        'scope': 'profile email',
+        'width': 305,
+        'height': 40,
+        'longtitle': true,
+        'theme': 'dark',
+        'onsuccess': onSuccess,
+        'onfailure': onFailure
+      });
+    }
+  </script>    
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>

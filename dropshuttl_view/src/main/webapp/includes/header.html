@@ -33,7 +33,13 @@
                             <li><a href="reviews">reviews</a></li>
                             <li><a href="contact">contact us</a></li>
                             <li><a href="#" data-ng-click="booknowdetails()">Book Now</a></li>
-                            <li><a href="#" onclick="document.getElementById('ds-login').style.display='block'" style="width:auto;">Login</a></li>
+                            <div class="dropdown">
+                            <li data-ng-if="username !=undefined && username !=null" class="dropbtn"><a href="#">Hi {{username}}</a></li>
+							<div class="dropdown-content">
+									<a href="j_spring_security_logout">Logout</a>
+								</div>
+							</div>
+                      <li data-ng-if="username ==undefined || username == null"><a href="#" onclick="document.getElementById('ds-login').style.display='block'" style="width:auto;">Login</a></li>
                         </ul>
                     </div>
               </nav>
@@ -47,7 +53,7 @@
     </div>
 
     <div class="container" style="width:auto;">
-      <input type="text" placeholder="Enter Username" name="j_username" required >
+      <input type="text" placeholder="Enter EmailId or Mob no." name="j_username" required >
       <input type="password" placeholder="Enter Password" name="j_password" required>
         
       <button type="submit" >Login</button>
@@ -65,28 +71,6 @@
     </div> 
       </form>
 </div>
-<!-- login with google  -->
- <script>
-    function onSuccess(googleUser) {
-      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-    }
-    function onFailure(error) {
-      console.log(error);
-    }
-    function renderButton() {
-      gapi.signin2.render('my-signin2', {
-        'scope': 'profile email',
-        'width': 305,
-        'height': 40,
-        'longtitle': true,
-        'theme': 'dark',
-        'onsuccess': onSuccess,
-        'onfailure': onFailure
-      });
-    }
-  </script>
-  
-  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 <!--  Login with Facebook javascript  --> 
 <script>
   window.fbAsyncInit = function() {

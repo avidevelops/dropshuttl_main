@@ -1,5 +1,5 @@
 
-app.controller('signUpCtrl', ['$scope','$http','$location',function($scope,$http,$location) {
+app.controller('signUpCtrl', ['$scope','$http','$location',function($scope,$http,$location,$sessionStorage) {
 	
 	
 
@@ -16,7 +16,8 @@ app.controller('signUpCtrl', ['$scope','$http','$location',function($scope,$http
 	
     var resp=$http.post('/dropshuttl/addUser', data,{'Content-Type': 'application/json'}).then(function onSuccess(response) {
 	console.log(response.status+"   "+resp);
-    $location.path('/login');
+	$sessionStorage.setItem("user_name",resp);
+    $location.path('/booknow');
 	
 	}).catch(function onError(response) {
 	    // Handle error
@@ -32,17 +33,3 @@ app.controller('signUpCtrl', ['$scope','$http','$location',function($scope,$http
 	}
 
 	}]);
-/*app.factory('dataService', function ($q, $timeout) {
-    return { 
-        data : {},
-        load : function(id) {
-            var defer = $q.defer();
-            var data = this.data;
-            $timeout(function () {
-                data.id = id;
-                defer.resolve(data);
-            }, 1000);
-            return defer.promise;
-        }
-    };
-});*/

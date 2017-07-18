@@ -5,8 +5,8 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<http use-expressions="true">
-		<form-login login-page="/login" default-target-url="/" authentication-failure-url="/login?error=true" />
-		<logout />
+		<form-login login-page="/login" default-target-url="/booknow" authentication-failure-url="/login?error=true" />
+		<logout logout-success-url="/home?logout"  delete-cookies="JSESSIONID" />
 
 	</http>
 

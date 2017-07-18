@@ -1,13 +1,26 @@
 /**
  * 
  */
-app.controller('bookingCtrl', function($scope, $http,$location,$q,$rootScope,bookingservice) {
-	/*$scope.getPrice = function()
-	{
-		$location.path("/signup");
+app.controller('bookingCtrl', function($scope, $http,$location,$q,$rootScope,bookingservice,identifyCustomer) {
+	
+if($location.search().id_token == undefined || $location.search().id_token == null){
+	
 
-	}*/
-  
+	var userpromise = identifyCustomer.getUser();
+	userpromise.then(
+   		 function(response) {
+   			 console.log("user "+response.uname); 
+   			$rootScope.username=response.uname;
+       });
+}else
+	{
+	var id_token = $location.search().id_token;
+	 console.log("user "+id_token); 
+		$rootScope.username=id_token;
+	}
+	console.log("username "+$rootScope.username);
+	console.log("$rootScope "+$rootScope); 
+	
 	$scope.getPrice = function()
 	{
 		$scope.showLoader = true;
@@ -20,36 +33,14 @@ app.controller('bookingCtrl', function($scope, $http,$location,$q,$rootScope,boo
 		order.toAddress=orderData.dropadd;
 		
 		 var data=JSON.stringify(order);
-	   //  $location.path("estprice");
-	     
-	  /* var price=$http.post('/dropshuttl/checkAvailablePrice', data,{'Content-Type': 'application/json'}).then(function onSuccess(response) {
-		console.log(response.status+"   "+price);
-	    	 deferred.resolve(price);
-	    	 $scope.showLoader = false;
-	    	 return deferred.promise;
-	    	 $location.path('/error');
-		
-		}).catch(function onError(response) {
-		    // Handle error
-		    var data = response.data;
-		    var status = response.status;
-		    var statusText = response.statusText;
-		    var headers = response.headers;
-		    var config = response.config;
-		    console.log(status+" "+statusText);
-		   
-		  });*/
-		
-	    	 var promise = bookingservice.getCost(data);
+	     var promise = bookingservice.getCost(data);
 	         promise.then(
 	        		 function(response) {
 	        			 console.log("price "+response); 
-	        			 $rootScope.price=response;
-	        			 $location.path('estprice');
+	        			 $scope.price=response;
+	        			 $scope.showLoader = false;
 	            });
-	       
-	    	// $rootscope.price=promise;
-	}
+		}
 	
 	
 	

@@ -5,7 +5,8 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider,$locat
         templateUrl : "includes/home.html",
         controller :"globalctrl"
     }).when("/home", {
-        templateUrl : "includes/home.html"
+        templateUrl : "includes/home.html",
+        controller :"globalctrl"
     }).when("/login", {
         templateUrl : "views/login.html",
         controller : 'signUpCtrl'
@@ -29,14 +30,19 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider,$locat
         controller : 'signUpCtrl'
     }).when("/booknow", {
         templateUrl : "views/booknow.html",
-        controller : 'bookingCtrl'
+        controller : 'bookingCtrl'//,
+       /* resolve: {
+        	getUserInfo: function (identifyCustomer) {
+              return identifyCustomer.getUser();
+            }
+          }*/
         
     }).when("/estprice",{
         templateUrl : "views/booknow.html",
          controller : 'bookingCtrl'
         	
     }).otherwise({
-    	redirect: '/home'
+    	redirect: 'index.html'
     })
   
     $locationProvider.html5Mode({
@@ -67,3 +73,30 @@ app.service("bookingservice", function($http, $q){
     
   }
     });
+
+app.service("identifyCustomer", function($http,$q){
+    return {
+   	 getUser: function() {
+   		var deferred = $q.defer();
+
+   		      $http.get('/dropshuttl/getUser').then(function onSuccess(response) {
+   		    	deferred.resolve(response.data);
+   		    	//  $scope.username=response.data.uname;
+   		      }).catch(function onError(response) {
+   			    // Handle error
+   			    //  var data = response.data;
+   			  //   deferred.reject(response.statusText);
+   			    
+   			    console.log(response.status+" "+response.statusText);
+   			   
+
+       })
+   		   return deferred.promise;
+
+
+   	 }
+    
+  }
+    });
+
+

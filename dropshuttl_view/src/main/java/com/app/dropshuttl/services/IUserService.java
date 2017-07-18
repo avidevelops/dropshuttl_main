@@ -4,9 +4,10 @@ import com.app.dropshuttl.model.UserModel;
 
 public interface IUserService {
 
-    public UserModel findByName(final String uname);
+   // public UserModel findByName(final String uname);
+    public UserModel findByEmail(final String uname);
 
-    public UserModel findById(final long id);
+    public UserModel findByMobile(final String mob);
 
     // write
 

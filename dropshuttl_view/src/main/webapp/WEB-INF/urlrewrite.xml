@@ -1,0 +1,26 @@
+<urlrewrite default-match-type="wildcard">
+	<rule>
+		<from>/booknow</from>
+		<to>/index.html</to>
+	</rule>
+	<rule>
+		<from>/review</from>
+		<to>/index.html</to>
+	</rule>
+	<rule>
+		<from>/features</from>
+		<to>/index.html</to>
+	</rule>
+	<rule>
+		<from>/aboutus</from>
+		<to>/index.html</to>
+	</rule>
+	<rule>
+		<from>/signup</from>
+		<to>/index.html</to>
+	</rule>
+	<rule>
+		<from>/home</from>
+		<to>/index.html</to>
+	</rule>
+</urlrewrite>

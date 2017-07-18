@@ -17,20 +17,23 @@ public class UserService implements IUserService {
 	
 	@Autowired
 	IUserDao dao;
-
+/**
+ * 
+ */
 	@Override
-	public UserModel findByName(String uname) {
-		// TODO Auto-generated method stub
-		UserMast user = dao.findByUname(uname);	
+	public UserModel findByEmail(String uname) {
+		
+		UserMast user = dao.findByUmailId(uname);	
 		UserModel userModel = DtoMapper.map(user, UserModel.class);
 		return userModel;
 	}
 
-//	@Override
-//	public UserModel findById(long id) {
-//		// TODO Auto-generated method stub
-//		return dao.findOne(id);
-//	}
+@Override
+	public UserModel findByMobile(String mob) {
+	UserMast user = dao.findByUmob(mob);	
+	UserModel userModel =DtoMapper.map(user, UserModel.class);
+	return userModel;
+	}
 
 	@Override
 	public UserModel create(UserModel entity) {
@@ -49,10 +52,6 @@ public class UserService implements IUserService {
 		
 	}
 
-	@Override
-	public UserModel findById(long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 }

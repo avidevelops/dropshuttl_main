@@ -1,3 +1,4 @@
+
 package com.app.dropshuttl.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,14 @@ public class CustomUserService implements UserDetailsService {
 
 	@Autowired
 	IUserService userService;
-	
-	public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-		UserModel user = userService.findByName(username);
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		UserModel user=null;
+		if(username.contains("@"))
+		user = userService.findByEmail(username);
+		else
+		user=userService.findByMobile(username);
+	   
 		return new User(user.getUname(), PasswordSecurity.decrypt(user.getPass(), user.getUname()), user.getAuthorities());
 	}
 }

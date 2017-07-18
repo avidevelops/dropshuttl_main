@@ -19,6 +19,27 @@ public class UserModel  implements Serializable,UserDetails{
 	private String umob;
 	private String pass;
 	private String role;
+	private String usocialFB;
+	private String usocialGID;
+	private String isloggedinsocial;
+	public String getUsocialFB() {
+		return usocialFB;
+	}
+	public void setUsocialFB(String usocialFB) {
+		this.usocialFB = usocialFB;
+	}
+	public String getUsocialGID() {
+		return usocialGID;
+	}
+	public void setUsocialGID(String usocialGID) {
+		this.usocialGID = usocialGID;
+	}
+	public String getIsloggedinsocial() {
+		return isloggedinsocial;
+	}
+	public void setIsloggedinsocial(String isloggedinsocial) {
+		this.isloggedinsocial = isloggedinsocial;
+	}
 	public String getRole() {
 		return role;
 	}

@@ -1,15 +1,15 @@
-<div style="width:100%;">
-<div style="width:50%;padding-left:20px;">
+<div style="width:100%;clear:both;">
+<div style="width:50%;padding-left:20px;clear:both;">
 <form action="" method="post" data-ng-submit="getPrice()">
 <input type="date" data-ng-model="order.deliverydate" name="deliverydate" >
 <input type="text" data-ng-model="order.documentType" name="documentType" placeholder="Item Details" >
 <input type="text" data-ng-model="order.pickupadd" name="pickupadd" placeholder="Pick up Address" >
 <input type="text" data-ng-model="order.dropadd" name="dropadd" placeholder="Drop Address" >	
-<button type="submit">Next</button>
+<!-- <button type="submit">Next</button> -->
 </form>
-
-<a href="#" data-ng-click="getPrice()">Book Now</a>
-</div><div style="width:50%">
+<br/>
+<a href="#" class="button" data-ng-click="getPrice()">Next</a>
+</div><div style="width:50%;clear:both;"><br/>
 <p>{{price}}</p>
 </div>
 </div>
