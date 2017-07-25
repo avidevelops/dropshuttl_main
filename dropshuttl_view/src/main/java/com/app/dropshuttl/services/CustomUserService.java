@@ -16,14 +16,16 @@ public class CustomUserService implements UserDetailsService {
 
 	@Autowired
 	IUserService userService;
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		UserModel user=null;
-		if(username.contains("@"))
-		user = userService.findByEmail(username);
+		UserModel user = null;
+		if (username.contains("@"))
+			user = userService.findByEmail(username);
 		else
-		user=userService.findByMobile(username);
-	   
-		return new User(user.getUname(), PasswordSecurity.decrypt(user.getPass(), user.getUname()), user.getAuthorities());
+			user = userService.findByMobile(username);
+
+		return new User(user.getUname(), PasswordSecurity.decrypt(user.getPass(), user.getUname()),
+				user.getAuthorities());
 	}
 }

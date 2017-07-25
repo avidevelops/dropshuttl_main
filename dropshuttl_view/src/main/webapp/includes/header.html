@@ -28,18 +28,18 @@
 
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="aboutus">about</a></li>
-                            <li><a href="features">pricing</a></li>
+                            <li><a href="features">Features</a></li>
                             <li><a href="estimate">Price Estimate</a></li>
                             <li><a href="reviews">reviews</a></li>
                             <li><a href="contact">contact us</a></li>
                             <li><a href="#" data-ng-click="booknowdetails()">Book Now</a></li>
                             <div class="dropdown">
-                            <li data-ng-if="username !=undefined && username !=null" class="dropbtn"><a href="#">Hi {{username}}</a></li>
+                            <li data-ng-if="username !=undefined && username !=null && username !=''" class="dropbtn"><a href="#">Hi {{username}}</a></li>
 							<div class="dropdown-content">
-									<a href="j_spring_security_logout">Logout</a>
+									<a href="#" data-ng-click="clearScope()">Logout</a>
 								</div>
 							</div>
-                      <li data-ng-if="username ==undefined || username == null"><a href="#" onclick="document.getElementById('ds-login').style.display='block'" style="width:auto;">Login</a></li>
+                      <li data-ng-if="username ==undefined || username == null || username ==''"><a href="#" onclick="document.getElementById('ds-login').style.display='block'" style="width:auto;">Login</a></li>
                         </ul>
                     </div>
               </nav>
@@ -63,8 +63,9 @@
       <p class="" style="margin-bottom:3px;overflow:hidden;text-align:center;color:#555;font-weight:bold;" data-reactid="20">OR</p>
       <hr>
       <div id="my-signin2"></div><br/>
-      <div class="fb-login-button" data-max-rows="1" data-width="306" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+      <div class="fb-login-button"  onlogin="checkLoginState();" data-max-rows="1" data-width="306" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" onlogin="checkLoginState();"></div>
       
+  <!--   <fb:login-button scope="public_profile,email" ></fb:login-button> -->
     
     <span>Need an account? </span>
     <a href="signup" >Sign up</a> 
@@ -90,6 +91,61 @@
      js.src = "//connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
+  
+ 
+ function checkLoginState() { 
+ alert("inside checkLoginState");
+ FB.login(function(response) {
+	   console.log(response);
+	}, {scope: 'email'});
+ 
+  FB.getLoginStatus(function(response) {
+	 statusChangeCallback(response);
+	 });
+	  }
+ 
+ function statusChangeCallback(response) {
+	    console.log('statusChangeCallback');
+	    console.log(response);
+	    // The response object is returned with a status field that lets the
+	    // app know the current login status of the person.
+	    // Full docs on the response object can be found in the documentation
+	    // for FB.getLoginStatus().
+	    var uid = response.authResponse.userID;
+	    var accessToken = response.authResponse.accessToken;
+	    console.log('ID: ' + uid);
+	    console.log('accessToken: ' + accessToken);
+	    console.log('response ' + response.status);  
+	    if (response.status === 'connected') {
+	      // Logged into your app and Facebook.
+	    FB.api('/me?fields=id,name,email', function(response) {
+         console.log('me response '+response);
+	    	console.log('Successful login for: ' + response.name);
+	    	console.log('Successful login for: ' + response.email);
+/* 
+	         $.ajax({
+	        	  method: "POST",
+	        	  url: "/dropshuttl/fbSignin",
+	        	  data: "{ id: "+uid+",name: "+response.name+", email: "+response.email+" }"
+	        	}) */
+	    	  var xhr = new XMLHttpRequest();
+	         xhr.open('POST', '/dropshuttl/fbSignin');
+	         xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+	         xhr.onload = function() {
+	           console.log('Signed in as: ' + xhr.responseText);
+	         };
+	         xhr.send(JSON.stringify({ usocialFB: uid,uname: response.name, umailId: response.email}));
+	             window.location.href = "/dropshuttl/booknow?id_token="+response.name;
+      
+	    });
+	   	 console.log('response ' + response.status);
+	    } else {
+	      // The person is not logged into your app or we are unable to tell.
+	     /*  document.getElementById('status').innerHTML = 'Please log ' +
+	        'into this app.'; */
+	    	 console.log('response ' + response.status);
+	    }
+	  }
 </script>
-       
-    
+
+      

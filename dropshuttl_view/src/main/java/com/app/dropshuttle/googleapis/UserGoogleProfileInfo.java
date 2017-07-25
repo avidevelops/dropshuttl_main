@@ -55,6 +55,7 @@ public class UserGoogleProfileInfo {
 			user.setUmailId(email);
 			user.setUsocialGID(sub);
 			user.setIsloggedinsocial("Y");
+			user.setPass(userId);
 
 			logger.debug("user profile " + name);
 		} else {

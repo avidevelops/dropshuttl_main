@@ -44,8 +44,8 @@ h6,
 .navbar-default {
   background: none;
   border: none;
-  padding-top: 40px;
-  padding-bottom: 20px;
+ /*  padding-top: 40px;
+  padding-bottom: 20px; */
   /* -webkit-transition: all 0.25s ease-in-out;
   -moz-transition: all 0.25s ease-in-out;
   -ms-transition: all 0.25s ease-in-out;
@@ -1133,7 +1133,7 @@ form .form-control:focus {
         width: 100%;
         position: fixed;        
         background: linear-gradient(-45deg, #66cdcc 0%, #336799 100%);
-        padding: 25px 0;
+      /*   padding: 25px 0; */
         /* color: #fff; */
     }
     .fixed-header{

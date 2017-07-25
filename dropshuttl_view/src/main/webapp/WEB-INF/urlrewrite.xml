@@ -23,4 +23,8 @@
 		<from>/home</from>
 		<to>/index.html</to>
 	</rule>
+	<rule>
+		<from>/logoutSuccess</from>
+		<to>/index.html</to>
+	</rule>
 </urlrewrite>

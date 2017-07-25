@@ -2,15 +2,18 @@
  * 
  */
 
-app.controller('globalctrl', function($scope, $http,$location) {
+app.controller('globalctrl', function($scope, $http,$location,$rootScope,bookingservice) {
     	
    $scope.findDistance=function(source,destination)
    {    
 	  
     	
-    	var requestUrl="https://maps.googleapis.com/maps/api/geocode/json?address=";
-		var api_key="&key=AIzaSyDFuiFYl3dg1bm4xofhWp7sVE3y0dXTgag";
-		var source_address = source.split(' ').join('%20');
+    	//var requestUrl="https://maps.googleapis.com/maps/api/geocode/json?address=";
+		//var api_key="&key=AIzaSyDFuiFYl3dg1bm4xofhWp7sVE3y0dXTgag";
+		//var source_address ="";
+		//var destination_address="";
+		
+		/*source_address= source.split(' ').join('%20');
 		var requestUrlSource=requestUrl+source_address+api_key;
 		
 		 $http.get(requestUrlSource).then(function (response) {
@@ -24,33 +27,36 @@ app.controller('globalctrl', function($scope, $http,$location) {
         	 $scope.destinationlat = response.data.results[0].geometry.location.lat;
              $scope.destinationlng = response.data.results[0].geometry.location.lng;
         	 
-        });
+        });*/
+		 $scope.source_address=source;
+	     $scope.destination_address=destination;
 		 $scope.initMap(); 
+		 $scope.getEstimatePrice(source,destination);
    } 
    
    $scope.initMap =function(){
        var bounds = new google.maps.LatLngBounds;
        var markersArray = [];
       // 28.7041° N, 77.1025° E
-     var origin1 = {lat: $scope.sourcelat, lng: $scope.sourcelng};
-      // var origin2 = 'New Delhi, India';
-      // var destinationA = 'Ghaziabad, India';
-      var destinationB = {lat: $scope.destinationlat, lng: $scope.destinationlng};
+    // var origin1 = {lat: $scope.sourcelat, lng: $scope.sourcelng};
+      var origin2 = $scope.source_address;
+      var destinationA = $scope.destination_address;
+      //var destinationB = {lat: $scope.destinationlat, lng: $scope.destinationlng};
 
        var destinationIcon = 'https://chart.googleapis.com/chart?' +
            'chst=d_map_pin_letter&chld=D|FF0000|000000';
        var originIcon = 'https://chart.googleapis.com/chart?' +
            'chst=d_map_pin_letter&chld=O|FFFF00|000000';
        var map = new google.maps.Map(document.getElementById('map'), {
-         center: {lat: 55.53, lng: 9.4},
+         center: {lat: 28.7041, lng: 77.1025},
          zoom: 10
        });
        var geocoder = new google.maps.Geocoder();
 
        var service = new google.maps.DistanceMatrixService;
        service.getDistanceMatrix({
-         origins: [origin1],
-         destinations: [destinationB],
+         origins: [origin2],
+         destinations: [destinationA],
          travelMode: 'DRIVING',
          unitSystem: google.maps.UnitSystem.METRIC,
          avoidHighways: false,
@@ -91,14 +97,34 @@ app.controller('globalctrl', function($scope, $http,$location) {
                geocoder.geocode({'address': destinationList[j]},
                	showGeocodedAddressOnMap(true));
                outputDiv.innerHTML += originList[i] + ' to ' + destinationList[j] +
-                   ': ' + results[j].distance.text + ' in ' +
-                   results[j].duration.text + '<br>';
+                   ': <b>' + results[j].distance.text + '</b> in <b>' +
+                   results[j].duration.text + '</b><br>';
              }
            }
          }
        });
+      
      }
 
+   $scope.getEstimatePrice=function(orgin,destination)
+   {
+	   $scope.showLoader = true;
+	    var order=new Object();
+		//order.deliverydate=orderData.deliverydate;
+		//order.orderType=orderData.documentType;
+		order.fromAdderss=orgin;
+		order.toAddress=destination;
+		 var data=JSON.stringify(order);
+	     var promise = bookingservice.getCost(data);
+	         promise.then(
+	        		 function(response) {
+	        			 console.log("price "+response); 
+	        			 $scope.price=response;
+	        			 $scope.showLoader = false;
+	            });
+		
+   }
+   
      $scope.deleteMarkers= function(markersArray) {
        for (var i = 0; i < markersArray.length; i++) {
          markersArray[i].setMap(null);
@@ -110,5 +136,24 @@ $scope.booknowdetails=function(){
 	console.log("inside book now");
 	$location.path("booknow");
 }
+
+$scope.clearScope=function()
+{
+	console.log("deleting scope on logout");
+	$rootScope.username='';
+	  $http.get('/dropshuttl/logout').then(function onSuccess(response) {
+		  $location.path("/");
+		  }).catch(function onError(response) {
+			    // Handle error
+			    //  var data = response.data;
+			  //   deferred.reject(response.statusText);
+			    
+			    console.log(response.status+" "+response.statusText);
+			   
+
+ })
+	
+	
+}	
 
 }); 

@@ -13,5 +13,5 @@ public interface IUserService {
 
     public UserModel create(final UserModel entity);
 
-    public void update(final UserModel entity);
+    public UserModel update(final UserModel entity);
 }

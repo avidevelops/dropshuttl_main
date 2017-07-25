@@ -3,7 +3,8 @@
  */
 app.controller('bookingCtrl', function($scope, $http,$location,$q,$rootScope,bookingservice,identifyCustomer) {
 	
-if($location.search().id_token == undefined || $location.search().id_token == null){
+if(($location.search().id_token == undefined || $location.search().id_token == null) 
+		&& ($rootScope.username ==undefined || $rootScope.username==null)){
 	
 
 	var userpromise = identifyCustomer.getUser();

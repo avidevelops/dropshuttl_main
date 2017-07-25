@@ -30,17 +30,12 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider,$locat
         controller : 'signUpCtrl'
     }).when("/booknow", {
         templateUrl : "views/booknow.html",
-        controller : 'bookingCtrl'//,
-       /* resolve: {
-        	getUserInfo: function (identifyCustomer) {
-              return identifyCustomer.getUser();
-            }
-          }*/
-        
+        controller : 'bookingCtrl'
     }).when("/estprice",{
         templateUrl : "views/booknow.html",
          controller : 'bookingCtrl'
-        	
+    }).when("/logoutSuccess",{
+        templateUrl : "views/home.html",
     }).otherwise({
     	redirect: 'index.html'
     })
