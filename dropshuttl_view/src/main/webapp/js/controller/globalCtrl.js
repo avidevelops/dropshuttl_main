@@ -6,7 +6,7 @@ app.controller('globalctrl', function($scope, $http,$location,$rootScope,booking
     	
    $scope.findDistance=function(source,destination)
    {    
-	  
+	   $scope.errorStatus="false";
     	
     	//var requestUrl="https://maps.googleapis.com/maps/api/geocode/json?address=";
 		//var api_key="&key=AIzaSyDFuiFYl3dg1bm4xofhWp7sVE3y0dXTgag";
@@ -28,10 +28,15 @@ app.controller('globalctrl', function($scope, $http,$location,$rootScope,booking
              $scope.destinationlng = response.data.results[0].geometry.location.lng;
         	 
         });*/
+	   if((source == undefined || source == null || source== '') || (destination == undefined || destination == null || destination== '') )
+		   {
+		   $rootScope.setInvalidError();
+		   } else{
 		 $scope.source_address=source;
 	     $scope.destination_address=destination;
 		 $scope.initMap(); 
 		 $scope.getEstimatePrice(source,destination);
+		   }
    } 
    
    $scope.initMap =function(){
@@ -155,5 +160,11 @@ $scope.clearScope=function()
 	
 	
 }	
+$rootScope.setInvalidError=function()
+{
+    $scope.errorStatus="true";
+	$scope.errorMessage="Invalid input. ! Please enter correct location";
+	
+}
 
 }); 

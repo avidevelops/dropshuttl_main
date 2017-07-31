@@ -36,6 +36,8 @@
                             <div class="dropdown">
                             <li data-ng-if="username !=undefined && username !=null && username !=''" class="dropbtn"><a href="#">Hi {{username}}</a></li>
 							<div class="dropdown-content">
+							        <a href="#">My Orders</a>
+							        <a href="#">Setting</a>
 									<a href="#" data-ng-click="clearScope()">Logout</a>
 								</div>
 							</div>
@@ -66,9 +68,10 @@
       <div class="fb-login-button"  onlogin="checkLoginState();" data-max-rows="1" data-width="306" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" onlogin="checkLoginState();"></div>
       
   <!--   <fb:login-button scope="public_profile,email" ></fb:login-button> -->
-    
-    <span>Need an account? </span>
-    <a href="signup" >Sign up</a> 
+    <br/>
+   <span>Create a new Account ? </span>
+    <a href="signup"  onclick="document.getElementById('ds-login').style.display='none'">Sign up</a> 
+    <br/>
     </div> 
       </form>
 </div>

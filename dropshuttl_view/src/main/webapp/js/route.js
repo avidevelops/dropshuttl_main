@@ -15,7 +15,8 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider,$locat
     }).when("/features", {
         templateUrl : "includes/features.html"
     }).when("/estimate", {
-        templateUrl : "includes/priceestimate.html"
+        templateUrl : "includes/priceestimate.html",
+        controller :"globalctrl"
     }).when("/signIn", {
         templateUrl : "views/signin.html"
     }).when("/reviews", {
@@ -88,6 +89,27 @@ app.service("identifyCustomer", function($http,$q){
        })
    		   return deferred.promise;
 
+
+   	 }
+    
+  }
+    });
+
+app.service("creatingAccount", function($http,$q){
+    return {
+    	createUser: function(data) {
+   		var deferred = $q.defer();
+          $http.post('/dropshuttl/addUser', data,{'Content-Type': 'application/json'}).then(function onSuccess(response) {
+   			deferred.resolve(response.data);
+   			$scope.errorStatus = '';
+   			console.log(response.status+"   ");
+          }).catch(function onError(response) {
+   			    // Handle error
+   			    console.log(response.status+" "+response.statusText);
+   			    $scope.errorStatus = 'true';
+   			    $scope.errorMessage = response.data.message;
+   			  })
+   		   return deferred.promise;
 
    	 }
     

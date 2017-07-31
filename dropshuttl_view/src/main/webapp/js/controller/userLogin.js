@@ -1,35 +1,38 @@
 
-app.controller('signUpCtrl', ['$scope','$http','$location',function($scope,$http,$location,$sessionStorage) {
+app.controller('signUpCtrl', function($scope,$http,$q,$location,$rootScope,creatingAccount) {
 	
-	
-
 	$scope.validateForm=function(){
+	$scope.errorStatus = 'false';
+	var userData="";
+	userData=$scope.user;
+	if ($scope.user.uname == undefined || $scope.user.uname == null
+			|| $scope.user.umailId == undefined || $scope.user.umailId == null
+			|| $scope.user.umob == undefined ||  $scope.user.umob == null || $scope.user.pass==undefined || $scope.user.pass ==null)
+	{
+		 $scope.errorStatus = 'true';
+		 $scope.errorMessage = 'Please enter all fields';	
 		
-	var userData=$scope.user;
-	var user=new Object();
-	user.uname=userData.uname;
-	user.umailId=userData.umailId;
-	user.umob=userData.umob;
-	user.pass=userData.pass;
-	
-	var data=JSON.stringify(user);
-	
-    var resp=$http.post('/dropshuttl/addUser', data,{'Content-Type': 'application/json'}).then(function onSuccess(response) {
-	console.log(response.status+"   "+resp);
-	$sessionStorage.setItem("user_name",resp);
-    $location.path('/booknow');
-	
-	}).catch(function onError(response) {
-	    // Handle error
-	    var data = response.data;
-	    var status = response.status;
-	    var statusText = response.statusText;
-	    var headers = response.headers;
-	    var config = response.config;
-	    console.log(status+" "+statusText);
-	   
-	  });
-	
-	}
+	}else{
+		var user=new Object();
+		user.uname=userData.uname;
+		user.umailId=userData.umailId;
+		user.umob=userData.umob;
+		user.pass=userData.pass;
+		
+		//$rootScope.username=user.uname;
+		var data=JSON.stringify(user);
+		var newname="";
+	    
+		var createuserpromise = creatingAccount.createUser(data);
+		createuserpromise.then(
+	   		 function(response) {
+	   			 console.log("user "+response.uname); 
+	   			$rootScope.username=response.uname;
+	   			$location.path("/booknow")
+	       });
+		
+			 
+		}
+		}
 
-	}]);
+	});

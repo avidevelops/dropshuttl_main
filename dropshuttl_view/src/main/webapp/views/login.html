@@ -1,7 +1,7 @@
 
 
-<button onclick="document.getElementById('ds-login').style.display='block'" style="width:auto;">Login</button>
-<button style="width:auto;">Sign Up</button>
+<!-- <button onclick="document.getElementById('ds-login').style.display='none'" style="width:auto;">Login</button>
+<button style="width:auto;">Sign Up</button> -->
 
 <div id="ds-login" class="modal">
   
@@ -22,10 +22,10 @@
       <hr>
       <div id="my-signin2"></div><br/>
       <div class="fb-login-button" data-max-rows="1" data-width="306" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
-      
-    
-    <span>Need an account? </span>
-    <a href="signup" >Sign up</a> 
+     <br/>
+    <span>Create a new Account ? </span>
+    <a href="signup" class="button" onclick="document.getElementById('ds-login').style.display='none'">Sign up</a> 
+    <br/>
     </div> 
       </form>
 </div>

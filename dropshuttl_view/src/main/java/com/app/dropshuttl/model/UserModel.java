@@ -5,18 +5,28 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.sun.istack.internal.NotNull;
 
 public class UserModel  implements Serializable,UserDetails{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5388886317312799281L;
+	
+	@NotBlank(message = "Please enter your User Name.")
 	private String uname;
+	@NotBlank(message = "Please enter valid Email Id.")
+	@Email
 	private String umailId;
+	@NotBlank(message = "Please enter mobile number.")
 	private String umob;
+	@NotBlank(message = "Please enter Password.")
 	private String pass;
 	private String role;
 	private String usocialFB;

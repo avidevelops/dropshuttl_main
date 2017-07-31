@@ -6,17 +6,17 @@
 			<p>Get the estimate of your delivery</p>
 		</div>
 		
-		<div style="padding-left: 20px;">
+		<div>
 		<div id="map"></div>
 		</div>
-		<div>
-			<input type="text" placeholder="From" id="fromlocation"
-				data-ng-model="mfrom"> <input type="text" placeholder="To"
-				id="tolocation" data-ng-model="mto"> <input type="button"
-				class="button" value="Estimate"
-				data-ng-click="findDistance(mfrom,mto)">
-
+		<div data-ng-show="errorStatus == 'true'" class="alert" style="margin-top: 10px;">
+		<span><strong>{{errorMessage}}</strong></span>
 		</div>
+		<div>
+			<input type="text" placeholder="From" id="fromlocation" data-ng-model="mfrom"> 
+			<input type="text" placeholder="To" id="tolocation" data-ng-model="mto"> 
+	        <input type="button" class="button" value="Estimate" data-ng-click="findDistance(mfrom,mto)">
+       </div>
 		<br/>
        <div id="right-panel">
 			<div id="output"></div>

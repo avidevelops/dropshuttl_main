@@ -5,8 +5,6 @@ import java.security.GeneralSecurityException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -34,17 +32,18 @@ public class UserController {
 
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST, consumes = {
 			"application/json;charset=UTF-8" }, produces = { "application/json;charset=UTF-8" })
-	public @ResponseBody UserModel insertUser(@RequestBody UserModel user, HttpSession session) {
+	public @ResponseBody UserModel insertUser(@RequestBody UserModel user, HttpServletRequest request, HttpServletResponse response) {
+		
 		UserModel resp = null;
-		if (userService.findByEmail(user.getUmailId()) != null)
+		if (userService.findByEmail(user.getUmailId()) == null)
 			resp = userService.create(user);
 		else {
 			logger.debug("User Aready Exists with this emailID ");
-			resp = userService.update(user);
+			//resp = userService.update(user);
 		}
-		logger.debug("Inside insertUser " + resp.getUname());
+		logger.debug("Inside insertUser " + user.getUname());
 
-		session.setAttribute("loginuser", resp.getUname());
+		request.getSession().setAttribute("username", user.getUname());
 		return user;
 	}
 
@@ -69,7 +68,7 @@ public class UserController {
 			socialUser = profile.getUserGoogleProfileDetails(idtoken);
 
 
-			request.getSession().setAttribute("username", user.getUname());
+			request.getSession().setAttribute("username", socialUser.getUname());
 		} catch (GeneralSecurityException e) {
 
 			e.printStackTrace();

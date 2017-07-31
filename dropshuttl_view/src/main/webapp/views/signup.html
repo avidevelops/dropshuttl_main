@@ -1,19 +1,27 @@
-<form method="post" data-ng-submit="validateForm()"
-	data-ng-controller="signUpCtrl" name="userForm">
-	<input type="text" id="" data-ng-model="user.uname" name="uname"
-		placeholder="Name" required> <span
-		data-ng-show="userForm.uname.$invalid">Name is Required !</span> <input
-		type="text" data-ng-model="user.umailId" name="umailId"
-		placeholder="Email Id" required> <span style="color: red"
-		data-ng-show="userForm.umailId.$dirty && userForm.umailId.$invalid">
-		<span data-ng-show="userForm.umailId.$error.required">Email is
-			required.</span> <span data-ng-show="userForm.umailId.$error.email">Invalid
-			email address.</span>
-	</span><input type="number" data-ng-model="user.umob" name="umob"
-		placeholder="Mobile No." maxlength="10" required> <span
-		data-ng-show="userForm.umob.$invalid">Number is Required !</span> <input
-		type="password" data-ng-model="user.pass" name="pass"
-		placeholder="Password" required> <input type="submit"
-		value="Sign Up"> <span data-ng-show="userForm.pass.$invalid">Password
-		is Required !</span>
-</form>
+<section id="estimate">
+	<div class="container">
+		{{errorStatus}}
+		<div style="width: 55%;padding-top: 100px;margin:0 auto;">
+		<div data-ng-show="errorStatus == 'true'" class="alert" style="margin-top: 10px;">
+		<span><strong>{{errorMessage}}</strong></span>
+		
+		</div>
+			<form method="post" data-ng-submit="validateForm()" data-ng-controller="signUpCtrl" name="userForm">
+			<div data-ng-show="userForm.umailId.$error.email" class="alert" style="margin-bottom: 6px;">Please enter valid email address.</div> 
+			<div data-ng-show="userForm.uname.$invalid && userForm.umailId.$invalid && userForm.umob.$invalid && userForm.pass.$invalid" 
+			class="alert" style="margin-bottom: 6px;">Just few details.Please enter all fields </div> 		
+				<input type="text" id="" data-ng-model="user.uname" name="uname" placeholder="Enter your name" required> 
+				<!-- <span data-ng-show="userForm.uname.$invalid">Name is Required !</span>  -->
+				<input type="email" data-ng-model="user.umailId" name="umailId" placeholder="Email Id" required > 
+				<!-- <span style="color: red" data-ng-show="userForm.umailId.$dirty && userForm.umailId.$invalid"> -->
+				<!-- <span data-ng-show="userForm.umailId.$error.required">Email is required.</span> -->
+				
+				<input type="number" data-ng-model="user.umob" name="umob" placeholder="Mobile No." maxlength="10" required> 
+				<!-- <span data-ng-show="userForm.umob.$invalid">Number is Required !</span>  -->
+				<input type="password" data-ng-model="user.pass" name="pass" placeholder="Password" required> 
+				<button type="submit" >Sign Up</button> 
+				<!-- <span data-ng-show="userForm.pass.$invalid">Password is Required !</span> -->
+			</form>
+		</div>
+</div>
+</section>

@@ -26,11 +26,11 @@ public class OrderBookingController {
 		 double toLongitude=0;
 		 int cost=0;
 	try{
-			String addr=lnl.getLatAndLong(order.getFromAdderss());
+			String addr=lnl.getLatAndLong(order.getFromAdderss()+order.getFromLocation());
 		    String[] ss=addr.split(",");
 		    fromLatitude=Double.parseDouble(ss[0]);
 		    fromLongitude=Double.parseDouble(ss[1]);
-		    addr=lnl.getLatAndLong(order.getToAddress());
+		    addr=lnl.getLatAndLong(order.getToAddress()+order.getToLoaction());
 		    ss=addr.split(",");
 		    toLatitude=Double.parseDouble(ss[0]);
 		    toLongitude=Double.parseDouble(ss[1]);
