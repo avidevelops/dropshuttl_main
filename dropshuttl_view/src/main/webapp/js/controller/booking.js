@@ -1,7 +1,7 @@
 /**
  * 
  */
-app.controller('bookingCtrl', function($scope, $http,$location,$q,$rootScope,bookingservice,identifyCustomer) {
+app.controller('bookingCtrl', function($scope, $http,$location,$q,$rootScope,bookingservice,identifyCustomer,proceedOrder) {
 	
 	 $scope.showPrice=false;
 	if(($location.search().id_token == undefined || $location.search().id_token == null) 
@@ -16,11 +16,15 @@ app.controller('bookingCtrl', function($scope, $http,$location,$q,$rootScope,boo
        });
 }else
 	{
-	if($location.search().id_token != undefined || $location.search().id_token != null){
-	 var id_token = $location.search().id_token;
-	 console.log("user "+id_token); 
-		$rootScope.username=id_token;
+	if (($location.search().id_token != undefined || $location
+			.search().id_token != null)
+			&& ($rootScope.username == null
+					|| $rootScope.username == '' || $rootScope.username == undefined)) {
+		var id_token = $location.search().id_token;
+		console.log("user " + id_token);
+		$rootScope.username = id_token;
 	}
+												
 	}
 	console.log("username "+$rootScope.username);
 	console.log("$rootScope "+$rootScope); 
@@ -50,7 +54,33 @@ app.controller('bookingCtrl', function($scope, $http,$location,$q,$rootScope,boo
 	        		 });
 		}
 	
+	$scope.proceedWithOrder=function()
+	{
+		var orderdetails="";
+		orderdetails=$scope.order;
+		var order=new Object();
+		order.deliveryTime=orderdetails.deliverydate;
+		order.documentType=orderdetails.documentType
+		order.fromAdderss=orderdetails.pickupadd;
+		order.fromLocation=orderdetails.pickuploaction;
+		order.toAddress=orderdetails.dropadd;
+		order.toLoaction=orderdetails.droplocation;
+		order.orderPrice=orderdetails.orderPrice;
+	     var data=JSON.stringify(order);
+	     var promise = proceedOrder.getPaymentStaus(data);
+	         promise.then(
+	        		 function(response) {
+	        			 console.log("status "+response);
+	        			// $location.path("");
+	        		 });
+		
+	}
 	
 	
+	$scope.backtobooknow=function()
+	{
+	
+	 $location.path("booknow");
+	}
 	
 });

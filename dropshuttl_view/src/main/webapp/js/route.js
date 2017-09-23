@@ -116,4 +116,25 @@ app.service("creatingAccount", function($http,$q){
   }
     });
 
+app.service("proceedOrder", function($http,$q){
+    return {
+    	getPaymentStaus: function(data) {
+   		var deferred = $q.defer();
+          $http.post('/dropshuttl/receiveOrderPayment', data,{'Content-Type': 'application/json'}).then(function onSuccess(response) {
+   			deferred.resolve(response.data);
+   			$scope.errorStatus = '';
+   			console.log(response.status+"   ");
+          }).catch(function onError(response) {
+   			    // Handle error
+   			    console.log(response.status+" "+response.statusText);
+   			    $scope.errorStatus = 'true';
+   			    $scope.errorMessage = response.data.message;
+   			  })
+   		   return deferred.promise;
+
+   	 }
+    
+  }
+    });
+
 

@@ -13,7 +13,8 @@ public class PriceModel {
 	public static void main(String [] arg){
 		
 		try {
-			double fare = new PriceModel().getMetroFair(28.608139, 77.294747, 28.607641, 77.295500);
+			//double fare = new PriceModel().getMetroFair(28.6081393,77.29474669999999,43.1564609,-77.5938791);
+			double fare = new PriceModel().getMetroFair(43.1564609,-77.5938791,28.6081393,77.29474669999999);
 			System.out.println(fare);
 		} catch (NumberFormatException | StationNotFound | SQLException e) {
 			// TODO Auto-generated catch block

@@ -1,19 +1,26 @@
 package com.app.dropshuttl.controller;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.app.dropshuttl.metro.exception.StationNotFound;
 import com.app.dropshuttl.model.Order;
 import com.app.dropshuttl.model.PriceModel;
+import com.app.dropshuttl.services.OrderService;
 import com.app.dropshuttle.googleapis.AddressLatitudeLongitude;
 
 @Controller
 @RequestMapping("/")
 public class OrderBookingController {
+	
+	@Autowired
+	OrderService orderservice;
+	
 	final static Logger logger = Logger.getLogger(UserController.class);
 	@RequestMapping(value = "/checkAvailablePrice", method = RequestMethod.POST,consumes = {"application/json;charset=UTF-8"}, produces={"application/json;charset=UTF-8"})
 	public @ResponseBody  int  getPriceForOrder(@RequestBody Order order) throws StationNotFound
@@ -44,4 +51,13 @@ public class OrderBookingController {
 		    logger.debug("Order Details"+ order);
 		    return cost;
     }
+	
+	@RequestMapping(value = "/receiveOrderPayment", method = RequestMethod.POST,consumes = {"application/json;charset=UTF-8"}, produces={"application/json;charset=UTF-8"})
+	public @ResponseBody  boolean  receiveOrderPayment(@RequestBody Order order) throws StationNotFound
+	{
+		orderservice.createNewOrder(order);
+		
+		return true;
+    }
+	
 }

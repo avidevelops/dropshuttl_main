@@ -20,7 +20,7 @@
 <a href="#" class="button" data-ng-click="getPrice()">Next</a></div>
 <div data-ng-if="showPrice">
 <p><input type="text" class="rupee" data-ng-model="order.orderPrice" data-ng-value="price"></p>
-<button type="submit" style="width: 45%;float:left;">Proceed</button><button type="button" style="width: 45%;float:right;">Cancel</button> 
+<button type="submit" style="width: 45%;float:left;" data-ng-click="proceedWithOrder()">Proceed</button><button type="button" data-ng-click="backtobooknow()" style="width: 45%;float:right;">Cancel</button> 
 </div>
 </form>
 </div>

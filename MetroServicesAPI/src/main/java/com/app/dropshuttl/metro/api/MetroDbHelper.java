@@ -9,13 +9,13 @@ import java.sql.Statement;
 
 public class MetroDbHelper
 {
-	private static final String DATABASE_NAME = "DelhiMetroDB.sqlite";
-	private static final int DATABASE_VERSION = 44;
-	private static final String DB_PATH = "D:\\delhiMetro\\Delhi-NCR Metro_5.7_apk-dl.com\\assets\\";
+	//private static final String DATABASE_NAME = "DelhiMetroDB.sqlite";
+	//private static final int DATABASE_VERSION = 44;
+	//private static final String DB_PATH = "D:\\delhiMetro\\Delhi-NCR Metro_5.7_apk-dl.com\\assets\\";
 	private static MetroDbHelper sInstance;
 	private Connection conn;
 
-	private static boolean checkDataBase()
+	public static boolean checkDataBase()
 	{
 		boolean bool = false;
 		Object connection = null;
@@ -23,8 +23,9 @@ public class MetroDbHelper
 		{
 			
 			//String url = "jdbc:sqlite:D:\\delhiMetro\\Delhi-NCR Metro_5.7_apk-dl.com\\assets\\DelhiMetroDB.sqlite";
-			String url = "jdbc:oracle:thin:avnkumar/Password123@localhost:1521:orcl";
-			Connection localConnection = DriverManager.getConnection(url);
+			//String url = "jdbc:oracle:thin:@localhost:1521:ORCL";
+			String url = "jdbc:oracle:thin:@localhost:1521:ORCL";
+			Connection localConnection = DriverManager.getConnection(url,"admin","admin123");
 			connection = localConnection;
 			System.out.println("Connection to SQLite has been established.");
 
@@ -97,8 +98,8 @@ public class MetroDbHelper
 		PreparedStatement ps = conn.prepareStatement("select STATION, DISTANCE from ("
 				+ "select * from("
 					+ "select STATION, latitude, longitude, SQRT("
-					+ "POWER(69.1 * (TO_NUMBER(Latitude) - ?), 2) + POWER(69.1 * (? - TO_NUMBER(longitude)) * COS(TO_NUMBER(latitude) / 57.3), 2)) "
-					+ "AS DISTANCE FROM MasterTable) where DISTANCE<15 order by DISTANCE) where rownum < 2");
+					+ "POWER(69.1 * (CONVERT(Latitude,SIGNED) - ?), 2) + POWER(69.1 * (? - CONVERT(longitude,SIGNED)) * COS(CONVERT(latitude,SIGNED) / 57.3), 2)) "
+					+ "AS DISTANCE FROM MasterTable) s where DISTANCE<15 order by DISTANCE) s limit 1 ");
 		
 		ps.setDouble(1, latitude);
 		ps.setDouble(2, longitude);
@@ -113,14 +114,18 @@ public class MetroDbHelper
 //        ods.setURL("jdbc:oracle:thin:system/Password123@//localhost:1522/pdborcl.global.XXXXXXXX.com");
 //        ods.setUser("hr");
 //        ods.setPassword("hr");
-		String url = "jdbc:oracle:thin:avnkumar/Password123@localhost:1521:orcl";
+		/*String url = "jdbc:oracle:thin:avnkumar/Password123@198.168.0.102:1521:orcl";
 		//String url = "jdbc:sqlite:D:\\delhiMetro\\Delhi-NCR Metro_5.7_apk-dl.com\\assets\\DelhiMetroDB.sqlite";
-		this.conn = DriverManager.getConnection(url);
-//		ResultSet rs = conn.getMetaData().getTables(null, null, "MASTERTABLE", null);
-//		while (rs.next()) {
-//			System.out.println(rs.getString(2));
-//			
-//		}
+		this.conn = DriverManager.getConnection(url);*/
+//		
+		String url = "jdbc:mysql://localhost:3306/dropshuttl_db";
+		this.conn = DriverManager.getConnection(url,"admin","admin123");
+		/*
+		ResultSet rs = conn.getMetaData().getTables(null, null, "MASTERTABLE", null);
+	while (rs.next()) {
+			System.out.println(rs.getString(2));
+			
+		}*/
 	}
 
 	public void updateColumn(String paramString)

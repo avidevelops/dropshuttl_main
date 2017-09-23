@@ -36,7 +36,9 @@ public class AddressLatitudeLongitude {
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Accept", "application/json");
-
+			conn.addRequestProperty("Accept-Language", "en-US,en;q=0.8");
+			conn.addRequestProperty("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36");
+            conn.setConnectTimeout(5000);
 			if (conn.getResponseCode() != 200) {
 				throw new RuntimeException("Failed : HTTP error code : "
 						+ conn.getResponseCode());

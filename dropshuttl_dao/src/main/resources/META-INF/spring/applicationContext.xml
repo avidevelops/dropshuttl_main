@@ -26,10 +26,10 @@
 	
 	<bean class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close" id="dataSource">
-		<property name="driverClassName" value="${database.driverClassName}" />
-		<property name="url" value="${database.url}" />
-		<property name="username" value="${database.username}" />
-		<property name="password" value="${database.password}" />
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/dropshuttl_db" />
+		<property name="username" value="admin" />
+		<property name="password" value="admin123" />
 		<property name="testOnBorrow" value="true" />
 		<property name="testOnReturn" value="true" />
 		<property name="testWhileIdle" value="true" />

@@ -14,6 +14,7 @@ public class Order {
 	private String toLoaction;
 	private String fromLocation;
 	
+	
 	public String getToLoaction() {
 		return toLoaction;
 	}
