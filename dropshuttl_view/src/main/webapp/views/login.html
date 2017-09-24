@@ -1,36 +1,30 @@
 
+<div class="container">
+	<div style="width: 55%; padding-top: 100px; margin: 0 auto;">
+<div data-ng-show="errorStatus == 'true'" class="alert" style="margin-top: 10px;">
+		<span><strong>{{errorMessage}}</strong></span>
+		</div>
+		<form action="j_spring_security_check" method="post">
 
-<!-- <button onclick="document.getElementById('ds-login').style.display='none'" style="width:auto;">Login</button>
-<button style="width:auto;">Sign Up</button> -->
+			<!--  <div class="container" style="width:auto;"> -->
+			<input type="text" placeholder="Enter EmailId or Mob no."
+				name="j_username" required> <input type="password"
+				placeholder="Enter Password" name="j_password" required>
 
-<div id="ds-login" class="modal">
-  
-  <form class="modal-content animate" action="j_spring_security_check" method="post">
-     <div class="imgcontainer">
-      <span onclick="document.getElementById('ds-login').style.display='none'" class="close" title="Close Modal">&times;</span>
-    </div>
-
-    <div class="container" style="width:auto;">
-      <input type="text" placeholder="Enter EmailId or Mob no." name="j_username" required >
-      <input type="password" placeholder="Enter Password" name="j_password" required>
-        
-      <button type="submit" >Login</button>
-      <input type="checkbox" checked="checked"><span>Remember me</span>
-      <span class="psw"><a href="#">Forgot password?</a></span>
-      <hr>
+			<button type="submit">Login</button>
+			<input type="checkbox" checked="checked"><span>Remember me</span> <span class="psw"><a href="#">Forgot password?</a></span>
+			<!--  <hr>
       <p class="" style="margin-bottom:3px;overflow:hidden;text-align:center;color:#555;font-weight:bold;" data-reactid="20">OR</p>
-      <hr>
-      <div id="my-signin2"></div><br/>
-      <div class="fb-login-button" data-max-rows="1" data-width="306" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
-     <br/>
-    <span>Create a new Account ? </span>
-    <a href="signup" class="button" onclick="document.getElementById('ds-login').style.display='none'">Sign up</a> 
-    <br/>
-    </div> 
-      </form>
+      <hr> -->
+			<!-- <div id="my-signin2"></div><br/> -->
+			<!--  <div class="fb-login-button" data-max-rows="1" data-width="306" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div> -->
+			<br /> <span>Create a new Account ? </span> <a href="signup">Sign up</a> <br />
+			<!--  </div>  -->
+		</form>
+	</div>
 </div>
 <!-- login with google  -->
- <script>
+<!-- <script>
     function onSuccess(googleUser) {
       console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
     }
@@ -51,7 +45,7 @@
   </script>
   
   <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-<!--  Login with Facebook javascript  --> 
+ Login with Facebook javascript  
 <script>
   window.fbAsyncInit = function() {
     FB.init({
@@ -71,4 +65,4 @@
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 </script>
- 
+  -->

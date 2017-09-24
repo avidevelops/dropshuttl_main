@@ -1,6 +1,14 @@
 
 app.controller('signUpCtrl', function($scope,$http,$q,$location,$rootScope,creatingAccount) {
 	
+	
+	if($location.absUrl().indexOf('loginError') != -1)
+		
+	{
+		$scope.errorStatus='true';
+		$scope.errorMessage='Entered EmailId/Mobile and Password do not match !';
+	}	
+	
 	$scope.validateForm=function(){
 	$scope.errorStatus = 'false';
 	var userData="";

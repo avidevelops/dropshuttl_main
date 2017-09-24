@@ -27,4 +27,8 @@
 		<from>/logoutSuccess</from>
 		<to>/index.html</to>
 	</rule>
+	<rule>
+		<from>/login</from>
+		<to>/index.html</to>
+	</rule>
 </urlrewrite>
