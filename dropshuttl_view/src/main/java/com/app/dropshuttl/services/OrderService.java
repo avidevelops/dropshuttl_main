@@ -10,7 +10,7 @@ import com.app.dropshuttl.model.Order;
 public interface OrderService {
 
 	public void createNewOrder(Order order);
-
+    public Order confirmPayment(Order order);
 	
 
 }

@@ -19,6 +19,12 @@ public class OrderManagementService implements OrderService{
 		orderdao.createOrder(orderentity);
 		
 	}
+	@Override
+	public Order confirmPayment(Order order) {
+		OrderMast orderentity = DtoMapper.map(order, OrderMast.class);
+		orderdao.completePayment(orderentity);
+		return order;
+	}
 
 	
 

@@ -13,8 +13,14 @@ public class Order {
 	private String orderPrice;
 	private String toLoaction;
 	private String fromLocation;
+	private String paymentStatus;
 	
-	
+	public String getPaymentStatus() {
+		return paymentStatus;
+	}
+	public void setPaymentStatus(String paymentStatus) {
+		this.paymentStatus = paymentStatus;
+	}
 	public String getToLoaction() {
 		return toLoaction;
 	}

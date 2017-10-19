@@ -21,6 +21,11 @@ public class OrderDaoImpl implements OrderDao {
 		 this.entityManager.persist(order);
 		 //this.entityManager.getTransaction().commit();
 	}
+	public OrderMast completePayment(OrderMast order) {
+		this.entityManager.persist(order);
+		order.setPaymentStatus("true");
+		return order;
+	}
 
 	
 

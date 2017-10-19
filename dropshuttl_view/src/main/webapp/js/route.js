@@ -37,7 +37,10 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider,$locat
          controller : 'bookingCtrl'
     }).when("/logoutSuccess",{
         templateUrl : "views/home.html",
-    }).otherwise({
+    }).when("/userSetting",{
+        templateUrl : "views/profileSetting.html",
+        controller : 'bookingCtrl'
+   }).otherwise({
     	redirect: 'index.html'
     })
   

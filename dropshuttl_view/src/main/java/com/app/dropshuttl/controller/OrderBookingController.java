@@ -47,6 +47,7 @@ public class OrderBookingController {
 		    
 	} catch (Exception e) {
 		    e.printStackTrace();
+		    
 		}
 		    logger.debug("Order Details"+ order);
 		    return cost;
@@ -55,7 +56,14 @@ public class OrderBookingController {
 	@RequestMapping(value = "/receiveOrderPayment", method = RequestMethod.POST,consumes = {"application/json;charset=UTF-8"}, produces={"application/json;charset=UTF-8"})
 	public @ResponseBody  boolean  receiveOrderPayment(@RequestBody Order order) throws StationNotFound
 	{
-		orderservice.createNewOrder(order);
+		
+		Order newOrder=orderservice.confirmPayment(order);
+		if(newOrder.getPaymentStatus().equals("true"))
+			orderservice.createNewOrder(order);
+		else
+		{
+			logger.debug("Error in Payment");
+		}
 		
 		return true;
     }
