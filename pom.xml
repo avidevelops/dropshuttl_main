@@ -193,6 +193,13 @@
 			<artifactId>jta</artifactId>
 			<version>1.1</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>8.0.7-dmr</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>commons-pool</groupId>
 			<artifactId>commons-pool</artifactId>
@@ -251,5 +258,6 @@
 		<module>dropshuttl_utils</module>
 		<module>dropshuttl_dao</module>
 		<module>dropshuttl_view</module>
+		<module>MetroServicesAPI</module>
 	</modules>
 </project>
