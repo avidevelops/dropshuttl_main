@@ -5,8 +5,8 @@ import java.util.Date;
 public class Order {
 
 	private String orderId;
-	private String uid;
-	private String fromAdderss;
+	private long uid;
+	private String fromAddress;
 	private String toAddress;
 	private Date deliveryTime;
 	private String orderType;
@@ -39,17 +39,17 @@ public class Order {
 	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
-	public String getUid() {
+	public long getUid() {
 		return uid;
 	}
-	public void setUid(String uid) {
+	public void setUid(long uid) {
 		this.uid = uid;
 	}
-	public String getFromAdderss() {
-		return fromAdderss;
+	public String getFromAddress() {
+		return fromAddress;
 	}
-	public void setFromAdderss(String fromAdderss) {
-		this.fromAdderss = fromAdderss;
+	public void setFromAdderss(String fromAddress) {
+		this.fromAddress = fromAddress;
 	}
 	public String getToAddress() {
 		return toAddress;

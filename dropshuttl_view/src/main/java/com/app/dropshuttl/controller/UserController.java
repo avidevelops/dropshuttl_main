@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.app.dropshuttl.model.UserModel;
+import com.app.dropshuttl.security.UserUtils;
 import com.app.dropshuttl.services.IUserService;
 import com.app.dropshuttle.googleapis.UserGoogleProfileInfo;
 
@@ -50,10 +51,17 @@ public class UserController {
 	@RequestMapping(value = "/getUser", method = RequestMethod.GET, produces = { "application/json;charset=UTF-8" })
 	public @ResponseBody UserModel getUserInfo(HttpServletRequest request, HttpServletResponse response) {
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String username = user.getUsername();
-		request.getSession().setAttribute("username", username);
-		UserModel usermodel = new UserModel();
-		usermodel.setUname(username);
+		boolean isMobile=UserUtils.isMobile(user);
+		//String username = user.getUsername();
+		UserModel usermodel=null;
+		if(isMobile)
+			usermodel=userService.findByMobile(user.getUsername());
+		else
+			usermodel=userService.findByEmail(user.getUsername());
+		request.getSession().setAttribute("username", usermodel.getUname());
+		request.getSession().setAttribute("user", usermodel);
+		//UserModel usermodel = new UserModel();
+		//usermodel.setUname(username);
 		return usermodel;
 	}
 
@@ -86,14 +94,11 @@ public class UserController {
 			HttpServletResponse response) {
 		UserModel user=null;
 		if (userService.findByEmail(data.getUmailId()) ==null) {
-			
 			user = userService.create(data);
-		} else
-
-		{
+		} else{
 			logger.debug("User already exists with this mail ID");
 			user = userService.update(data);
-		}		
+		}
 		return null;
 		
 	}
@@ -103,6 +108,5 @@ public class UserController {
 	    if (auth != null){    
 	        new SecurityContextLogoutHandler().logout(request, response, auth);
 	    }
-	   //You can redirect wherever you want, but generally it's a good practice to show login screen again.
-	}
+	  }
 }

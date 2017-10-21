@@ -36,7 +36,8 @@ app.controller('signUpCtrl', function($scope,$http,$q,$location,$rootScope,creat
 	   		 function(response) {
 	   			 console.log("user "+response.uname); 
 	   			$rootScope.username=response.uname;
-	   			$location.path("/booknow")
+	   			$location.path("/booknow");
+	   		   // $rootScope.$apply();
 	       });
 		
 			 

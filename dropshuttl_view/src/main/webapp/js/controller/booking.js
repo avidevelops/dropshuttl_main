@@ -51,11 +51,13 @@ app.controller('bookingCtrl', function($scope, $http,$location,$q,$rootScope,boo
 	        			 $scope.price=response;
 	        			 $scope.showLoader = false;
 	        			 $scope.showPrice=true;
+	        			// $rootScope.$apply();
 	        		 });
-		}
+		};
 	
 	$scope.proceedWithOrder=function()
 	{
+		$scope.showLoader = true;
 		var orderdetails="";
 		orderdetails=$scope.order;
 		var order=new Object();
@@ -64,23 +66,28 @@ app.controller('bookingCtrl', function($scope, $http,$location,$q,$rootScope,boo
 		order.fromAdderss=orderdetails.pickupadd;
 		order.fromLocation=orderdetails.pickuploaction;
 		order.toAddress=orderdetails.dropadd;
-		order.toLoaction=orderdetails.droplocation;
+		order.toLocation=orderdetails.droplocation;
 		order.orderPrice=orderdetails.orderPrice;
 	     var data=JSON.stringify(order);
-	     var promise = proceedOrder.getPaymentStaus(data);
-	         promise.then(
+	     var confirmOrder = proceedOrder.getPaymentStaus(data);
+	     confirmOrder.then(
 	        		 function(response) {
 	        			 console.log("status "+response);
-	        			// $location.path("");
+	        			 $scope.orderdetail=response;
+	        			 $scope.showLoader = false;
+	        			 $location.path("/orderconfirm");
+	        			// $rootScope.$apply();
+	        			 //console.log("Comletes order "+$location.path());
 	        		 });
-		
-	}
+	console.log("Comletes order "+$scope.orderdetail);
+	};
+	
 	
 	
 	$scope.backtobooknow=function()
 	{
 	
 	 $location.path("booknow");
-	}
+	};
 	
 });

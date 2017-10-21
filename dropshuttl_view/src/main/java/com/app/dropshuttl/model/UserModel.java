@@ -30,6 +30,7 @@ public class UserModel  implements Serializable,UserDetails{
 	private String usocialFB;
 	private String usocialGID;
 	private String isloggedinsocial;
+	private int uid;
 	public String getUsocialFB() {
 		return usocialFB;
 	}
@@ -114,5 +115,12 @@ public class UserModel  implements Serializable,UserDetails{
 		// TODO Auto-generated method stub
 		return false;
 	}
+	public int getUid() {
+		return uid;
+	}
+	public void setUid(int uid) {
+		this.uid = uid;
+	}
+	
 
 }

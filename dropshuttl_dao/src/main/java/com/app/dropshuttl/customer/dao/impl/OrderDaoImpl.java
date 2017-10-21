@@ -15,14 +15,15 @@ public class OrderDaoImpl implements OrderDao {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
+	
 	@Transactional
-	public void createOrder(OrderMast order) {
-		//this.entityManager.getTransaction().begin();
-		 this.entityManager.persist(order);
-		 //this.entityManager.getTransaction().commit();
-	}
-	public OrderMast completePayment(OrderMast order) {
+	public OrderMast createOrder(OrderMast order) {
 		this.entityManager.persist(order);
+		return order;
+	}
+	@Transactional
+	public OrderMast completePayment(OrderMast order) {
+		//this.entityManager.persist(order);
 		order.setPaymentStatus("true");
 		return order;
 	}

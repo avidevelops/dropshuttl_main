@@ -31,4 +31,8 @@
 		<from>/login</from>
 		<to>/index.html</to>
 	</rule>
+	<rule>
+		<from>/orderconfirm</from>
+		<to>/index.html</to>
+	</rule>
 </urlrewrite>

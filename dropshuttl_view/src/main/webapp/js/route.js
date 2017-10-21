@@ -1,5 +1,5 @@
 var app = angular.module("myApp", ['ngRoute','ngResource']);
-app.config(['$routeProvider', '$locationProvider',function($routeProvider,$locationProvider) {
+app.config(['$routeProvider', '$locationProvider','$qProvider',function($routeProvider,$locationProvider,$qProvider) {
     $routeProvider
     .when("/", {
         templateUrl : "includes/home.html",
@@ -40,13 +40,18 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider,$locat
     }).when("/userSetting",{
         templateUrl : "views/profileSetting.html",
         controller : 'bookingCtrl'
-   }).otherwise({
+   }).when("/orderconfirm", {
+	   templateUrl : "views/orderDetails.html",
+	   controller : 'bookingCtrl'
+  }).otherwise({
     	redirect: 'index.html'
     })
   
     $locationProvider.html5Mode({
     	  enabled: true
     	});
+    
+    $qProvider.errorOnUnhandledRejections(false);
 }]);
 
 
@@ -84,7 +89,7 @@ app.service("identifyCustomer", function($http,$q){
    		      }).catch(function onError(response) {
    			    // Handle error
    			    //  var data = response.data;
-   			  //   deferred.reject(response.statusText);
+   			    deferred.reject(response.statusText);
    			    
    			    console.log(response.status+" "+response.statusText);
    			   
@@ -111,6 +116,7 @@ app.service("creatingAccount", function($http,$q){
    			    console.log(response.status+" "+response.statusText);
    			    $scope.errorStatus = 'true';
    			    $scope.errorMessage = response.data.message;
+   			 deferred.reject(response.statusText);
    			  })
    		   return deferred.promise;
 
@@ -125,13 +131,14 @@ app.service("proceedOrder", function($http,$q){
    		var deferred = $q.defer();
           $http.post('/dropshuttl/receiveOrderPayment', data,{'Content-Type': 'application/json'}).then(function onSuccess(response) {
    			deferred.resolve(response.data);
-   			$scope.errorStatus = '';
-   			console.log(response.status+"   ");
+   			//$scope.errorStatus = '';
+   			console.log(response.status+" status   ");
           }).catch(function onError(response) {
    			    // Handle error
    			    console.log(response.status+" "+response.statusText);
-   			    $scope.errorStatus = 'true';
-   			    $scope.errorMessage = response.data.message;
+   			    //$scope.errorStatus = 'true';
+   			   // $scope.errorMessage = response.data.message;
+   			  //  deferred.reject(response.statusText);
    			  })
    		   return deferred.promise;
 
