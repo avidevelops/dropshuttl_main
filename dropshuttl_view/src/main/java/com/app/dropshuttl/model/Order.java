@@ -1,9 +1,14 @@
 package com.app.dropshuttl.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Order {
+public class Order implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String orderId;
 	private long uid;
 	private String fromAddress;

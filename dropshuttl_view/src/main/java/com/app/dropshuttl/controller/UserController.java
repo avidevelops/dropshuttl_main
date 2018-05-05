@@ -2,6 +2,8 @@ package com.app.dropshuttl.controller;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +20,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.app.dropshuttl.dto.OrderMast;
+import com.app.dropshuttl.model.Order;
 import com.app.dropshuttl.model.UserModel;
+import com.app.dropshuttl.modelmapper.DtoMapper;
 import com.app.dropshuttl.security.UserUtils;
 import com.app.dropshuttl.services.IUserService;
 import com.app.dropshuttle.googleapis.UserGoogleProfileInfo;
@@ -31,6 +36,13 @@ public class UserController {
 	@Autowired
 	IUserService userService;
 
+	/**
+	 * Method for signUp
+	 * @param user
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST, consumes = {
 			"application/json;charset=UTF-8" }, produces = { "application/json;charset=UTF-8" })
 	public @ResponseBody UserModel insertUser(@RequestBody UserModel user, HttpServletRequest request, HttpServletResponse response) {
@@ -60,6 +72,7 @@ public class UserController {
 			usermodel=userService.findByEmail(user.getUsername());
 		request.getSession().setAttribute("username", usermodel.getUname());
 		request.getSession().setAttribute("user", usermodel);
+		request.getSession(false);
 		//UserModel usermodel = new UserModel();
 		//usermodel.setUname(username);
 		return usermodel;
@@ -108,5 +121,24 @@ public class UserController {
 	    if (auth != null){    
 	        new SecurityContextLogoutHandler().logout(request, response, auth);
 	    }
+	  }
+	
+	@RequestMapping(value="/getOrders", method = RequestMethod.GET,produces = { "application/json;charset=UTF-8" })
+	public @ResponseBody List<Order> getOrdersForUser(HttpServletRequest request, HttpServletResponse response) {
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		boolean isMobile=UserUtils.isMobile(user);
+		UserModel usermodel=null;
+		if(isMobile) {
+			usermodel=userService.findByMobile(user.getUsername());
+		}else {
+			usermodel=userService.findByEmail(user.getUsername());
+		}
+		List<Order> retVals = new ArrayList<>();
+		List<OrderMast> orders = userService.getOrders(usermodel.getUid());
+		for(OrderMast order : orders) {
+			retVals.add(DtoMapper.map(order, Order.class));
+		}
+		
+		return retVals;
 	  }
 }

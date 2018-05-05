@@ -1,5 +1,6 @@
 package com.app.dropshuttl.services;
 
+import java.util.List;
 import java.util.Properties;
 
 import javax.transaction.Transactional;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.app.dropshuttl.constants.CommonConstants;
 import com.app.dropshuttl.customer.dao.IUserDao;
+import com.app.dropshuttl.customer.dao.UserDAO;
+import com.app.dropshuttl.dto.OrderMast;
 import com.app.dropshuttl.dto.UserMast;
 import com.app.dropshuttl.model.UserModel;
 import com.app.dropshuttl.modelmapper.DtoMapper;
@@ -21,6 +24,8 @@ public class UserService implements IUserService {
 	
 	@Autowired
 	IUserDao dao;
+	@Autowired
+	UserDAO  userDao;
 /**
  *  find user by Email ID
  */
@@ -68,6 +73,10 @@ public class UserService implements IUserService {
 		
 	}
 
-	
+	@Override
+	public List<OrderMast> getOrders(final long uid){
+		List<OrderMast> orders = userDao.getOrdersByUser(uid);
+		return orders;
+	}
 
 }

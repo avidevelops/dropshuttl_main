@@ -31,22 +31,23 @@ public class OrderBookingController {
 	{
 		 PriceModel price=new PriceModel();
 		 AddressLatitudeLongitude lnl=new AddressLatitudeLongitude();
-		 double fromLatitude=0;
-		 double fromLongitude=0;
-		 double toLatitude=0;
-		 double toLongitude=0;
+//		 double fromLatitude=0;
+//		 double fromLongitude=0;
+//		 double toLatitude=0;
+//		 double toLongitude=0;
 		 int cost=0;
 	try{
-			String addr=lnl.getLatAndLong(order.getFromAddress()+order.getFromLocation());
-		    String[] ss=addr.split(",");
-		    fromLatitude=Double.parseDouble(ss[0]);
-		    fromLongitude=Double.parseDouble(ss[1]);
-		    addr=lnl.getLatAndLong(order.getToAddress()+order.getToLoaction());
-		    ss=addr.split(",");
-		    toLatitude=Double.parseDouble(ss[0]);
-		    toLongitude=Double.parseDouble(ss[1]);
-		    logger.debug("address "+fromLatitude+" "+fromLongitude+" "+toLatitude+" "+toLongitude);
-		    cost= price.getMetroFair(fromLatitude, fromLongitude, toLatitude, toLongitude);
+//			String addr=lnl.getLatAndLong(order.getFromAddress()+order.getFromLocation());
+//		    String[] ss=addr.split(",");
+//		    fromLatitude=Double.parseDouble(ss[0]);
+//		    fromLongitude=Double.parseDouble(ss[1]);
+//		    addr=lnl.getLatAndLong(order.getToAddress()+order.getToLoaction());
+//		    ss=addr.split(",");
+//		    toLatitude=Double.parseDouble(ss[0]);
+//		    toLongitude=Double.parseDouble(ss[1]);
+//		    logger.debug("address "+fromLatitude+" "+fromLongitude+" "+toLatitude+" "+toLongitude);
+//		    cost= price.getMetroFair(fromLatitude, fromLongitude, toLatitude, toLongitude);
+		cost=50;
 		    logger.debug("cost "+cost);
 		    
 	} catch (Exception e) {

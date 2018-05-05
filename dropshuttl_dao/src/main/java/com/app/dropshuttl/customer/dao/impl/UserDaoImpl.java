@@ -1,5 +1,7 @@
 package com.app.dropshuttl.customer.dao.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.dropshuttl.customer.dao.UserDAO;
+import com.app.dropshuttl.dto.OrderMast;
 import com.app.dropshuttl.dto.UserMast;
 
 @Repository
@@ -33,6 +36,13 @@ public class UserDaoImpl implements UserDAO {
         else 
         	return false;
 	
+	}
+
+	public List<OrderMast> getOrdersByUser(long uid) {
+		@SuppressWarnings("unchecked")
+		List<OrderMast> orders =entityManager.createQuery("FROM OrderMast o where o.uid = :userid")
+				.setParameter("userid", uid ).getResultList();
+	    return orders;
 	}
 
 
