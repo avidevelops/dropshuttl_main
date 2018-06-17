@@ -95,9 +95,9 @@ public class MetroDbHelper
 	
 	public ResultSet fetchNearestMetroStation(double latitude, double longitude) throws SQLException
 	{
-		PreparedStatement ps = conn.prepareStatement("select STATION, DISTANCE from ("
+		PreparedStatement ps = conn.prepareStatement("select STATION, DISTANCE, STATIONID from ("
 				+ "select * from("
-					+ "select STATION, LATITUDE, LONGITUDE, CAST(SQRT("
+					+ "select STATION, STATIONID, LATITUDE, LONGITUDE, CAST(SQRT("
 					+ "POWER(69.1 * (CAST(LATITUDE as DECIMAL(12,6)) - ?), 2) + POWER(69.1 * (? - CAST(LONGITUDE as DECIMAL(12,6))) * COS(CAST(LATITUDE as DECIMAL(12,6)) / 57.3), 2)) AS DECIMAL(20,10)) "
 					+ "AS DISTANCE FROM MasterTable) s where DISTANCE<15 order by DISTANCE) s limit 1 ");
 		

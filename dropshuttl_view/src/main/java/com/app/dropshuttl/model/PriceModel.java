@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.app.dropshuttl.metro.api.MetroApplication;
-import com.app.dropshuttl.metro.api.Result;
 import com.app.dropshuttl.metro.exception.StationNotFound;
 
 public class PriceModel {
@@ -31,8 +30,12 @@ public class PriceModel {
 			price = 30;
 			return price;
 		}
-		Result result = app.getBestMetroRoute(fromStationData.get(0).toString(), toStationData.get(0).toString());
-		int fare =  Integer.parseInt(result.getFare());
+		
+		int fare = app.getFare((String)fromStationData.get(2), (String)toStationData.get(2));
+		if (fare == -1) {
+			throw new StationNotFound("failed to fetch price");
+		}
+		
 		
 		int toOnFootDistance = ((BigDecimal)fromStationData.get(1)).setScale(0, BigDecimal.ROUND_CEILING).intValue();
 		int fromOnFootDistance = ((BigDecimal)toStationData.get(1)).setScale(0, BigDecimal.ROUND_CEILING).intValue();

@@ -8,6 +8,7 @@
 */
 package com.app.dropshuttl.metro.api;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,6 +17,9 @@ import java.util.Comparator;
 import com.app.dropshuttl.metro.exception.StationNotFound;
 
 public class MetroApplication {
+	
+	private ArrayList<Object> nearestStation;
+	
 	public Result getBestMetroRoute(String stationFrom, String stationTo) throws StationNotFound, NumberFormatException, SQLException{
 		StationHelper stationHelper = StationHelper.getInstance();
 		stationHelper.fillData();
@@ -38,8 +42,48 @@ public class MetroApplication {
 	}
 	
 	public ArrayList<Object> getNearestMetroStationData(double latitude, double longitude) throws StationNotFound, NumberFormatException, SQLException{
-		StationHelper stationHelper = StationHelper.getInstance();
-		return stationHelper.getNearestStation(latitude, longitude);
+		try {
+			nearestStation = new ArrayList<Object>();
+			MetroDbHelper.getInstance().openDataBase();
+			ResultSet rs =new NearestStationFinderAPI().getNearestMetroStation(MetroDbHelper.getInstance(), latitude, longitude);
+			if (rs.isBeforeFirst()) {
+				rs.next();
+				nearestStation.add(rs.getString(rs.findColumn("STATION")));
+				nearestStation.add(rs.getObject(rs.findColumn("DISTANCE")));
+				nearestStation.add(rs.getString(rs.findColumn("STATIONID")));
+			}else{
+				MetroDbHelper.getInstance().close();
+				throw new StationNotFound("No station found with 15 km please try another transport");
+			}
+
+			rs.close();
+			MetroDbHelper.getInstance().close();
+			return nearestStation;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public int getFare(String fromStationID, String toStationID) throws SQLException{
+		ResultSet rs=null;
+		try {
+			MetroDbHelper.getInstance().openDataBase();
+			rs = new FareAPI().getRecord(MetroDbHelper.getInstance(), fromStationID, toStationID);
+			if (rs.isBeforeFirst()) {
+				rs.next();
+				return Integer.parseInt(rs.getString(1));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (rs != null)
+				rs.close();
+			MetroDbHelper.getInstance().close();
+		}
+		return -1;
 	}
 	
 	private class CompareRouteTime implements Comparator<Result> {

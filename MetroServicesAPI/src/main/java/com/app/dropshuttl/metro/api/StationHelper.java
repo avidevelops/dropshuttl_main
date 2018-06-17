@@ -20,7 +20,6 @@ public class StationHelper
   private OnDataQueryListener mListener;*/
 	private HashMap<String, MetroLines> metroLines;
 	private ArrayList<Station> stationList;
-	private ArrayList<Object> priceCalculationData;
 
 	public StationHelper()
 	{
@@ -305,29 +304,6 @@ public class StationHelper
 	public boolean isDiversionOfSameLine(String paramString1, String paramString2)
 	{
 		return ((MetroLines)this.metroLines.get(paramString1)).getDiversionOf().equals(((MetroLines)this.metroLines.get(paramString2)).getDiversionOf());
-	}
-
-	public ArrayList<Object> getNearestStation(double latitude, double longitude) throws StationNotFound{
-		try {
-			priceCalculationData = new ArrayList<Object>();
-			MetroDbHelper.getInstance().openDataBase();
-			ResultSet rs =new NearestStationFinderAPI().getNearestMetroStation(MetroDbHelper.getInstance(), latitude, longitude);
-			if (rs.isBeforeFirst()) {
-				rs.next();
-				priceCalculationData.add(rs.getString(rs.findColumn("STATION")));
-				priceCalculationData.add(rs.getObject(rs.findColumn("DISTANCE")));
-			}else{
-				throw new StationNotFound("No station found with 15 km please try another transport");
-			}
-
-			rs.close();
-			MetroDbHelper.getInstance().close();
-			return priceCalculationData;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
 	}
 
 	private class FillDataTask implements Runnable
