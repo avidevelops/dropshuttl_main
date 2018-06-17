@@ -23,7 +23,8 @@ public class FareAPI
   public ResultSet getRecord(MetroDbHelper paramMetroDbHelper, String paramString1, String paramString2)
   {
     paramString2 = '"' + paramString2 + '"';
-    paramString1 = "StationID='" + paramString1 + "'";
+    paramString2 = "`" + paramString2 + "`";
+    paramString1 = "StationID=" + paramString1;
     try {
 		return paramMetroDbHelper.fetchData("Fare", new String[] { paramString2 }, paramString1);
 	} catch (SQLException e) {

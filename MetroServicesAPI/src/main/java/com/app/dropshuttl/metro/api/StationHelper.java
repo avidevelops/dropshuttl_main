@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.springframework.security.web.util.TextEscapeUtils;
+import org.springframework.util.StringUtils;
+
 import com.app.dropshuttl.metro.exception.StationNotFound;
 
 public class StationHelper
@@ -55,14 +58,13 @@ public class StationHelper
 					String str1 = paramCursor.getString(paramCursor.findColumn("StationId"));
 					String str2 = paramCursor.getString(paramCursor.findColumn("gate"));
 					String str3 = paramCursor.getString(paramCursor.findColumn("towards"));
-					Station localStation = getStationById(str1);
-					ArrayList localArrayList2 = localStation.getGatesInfo();
-					ArrayList localArrayList1 = localArrayList2;
-					if (localArrayList2 == null) {
-						localArrayList1 = new ArrayList();
+					Station stationById = this.getStationById(str1);
+					ArrayList<GatesInfo> gatesInfo = stationById.getGatesInfo();
+					if (gatesInfo == null) {
+						gatesInfo = new ArrayList<GatesInfo>();
 					}
-					localArrayList1.add(new GatesInfo(str1, str2, str3));
-					localStation.setGatesInfo(localArrayList1);
+					gatesInfo.add(new GatesInfo(str1, str2, str3));
+					stationById.setGatesInfo(gatesInfo);
 				}
 			}
 		} catch (SQLException e) {
@@ -73,10 +75,10 @@ public class StationHelper
 
 	public static StationHelper getInstance()
 	{
-		if (mInstance == null) {
-			mInstance = new StationHelper();
+		if (StationHelper.mInstance == null) {
+			StationHelper.mInstance = new StationHelper();
 		}
-		return mInstance;
+		return StationHelper.mInstance;
 	}
 
 	private void getMetroLines(ResultSet paramCursor)
@@ -96,11 +98,11 @@ public class StationHelper
 					String str9 = paramCursor.getString(paramCursor.findColumn("FARE"));
 					String str10 = paramCursor.getString(paramCursor.findColumn("DIVERSION_OF"));
 					String str11 = paramCursor.getString(paramCursor.findColumn("diversions"));
-					String[] arrayOfString = null;
-					if (str11 != null && !str11.isEmpty()) {
-						arrayOfString = str11.split(",");
+					String[] split = null;
+					if (!StringUtils.isEmpty((CharSequence)str11)) {
+						split = str11.split(",");
 					}
-					this.metroLines.put(str1, new MetroLines(str1, str2, str4, str5, str6, str7, str8, str9, str10, str3, arrayOfString));
+					this.metroLines.put(str1, new MetroLines(str1, str2, str4, str5, str6, str7, str8, str9, str10, str3, split));
 				}
 			}
 		} catch (SQLException e) {
@@ -118,14 +120,13 @@ public class StationHelper
 					String str1 = paramCursor.getString(paramCursor.findColumn("StationId"));
 					String str2 = paramCursor.getString(paramCursor.findColumn("platformId"));
 					String str3 = paramCursor.getString(paramCursor.findColumn("towards1"));
-					Station localStation = getStationById(str1);
-					ArrayList localArrayList2 = localStation.getPlatformInfo();
-					ArrayList localArrayList1 = localArrayList2;
-					if (localArrayList2 == null) {
-						localArrayList1 = new ArrayList();
+					Station stationById = getStationById(str1);
+					ArrayList<PlatformInfo> platformInfo;
+					if ((platformInfo = stationById.getPlatformInfo()) == null) {
+						platformInfo = new ArrayList<PlatformInfo>();
 					}
-					localArrayList1.add(new PlatformInfo(str1, str2, str3));
-					localStation.setPlatformInfo(localArrayList1);
+					platformInfo.add(new PlatformInfo(str1, str2, str3));
+					stationById.setPlatformInfo(platformInfo);
 				}
 			}
 		} catch (SQLException e) {
@@ -142,14 +143,17 @@ public class StationHelper
 				{
 					String str1 = paramCursor.getString(paramCursor.findColumn("StationId"));
 					String str2 = paramCursor.getString(paramCursor.findColumn("id_line"));
-					Station localStation = getStationById(str1);
-					ArrayList localArrayList2 = localStation.getStationLines();
-					ArrayList localArrayList1 = localArrayList2;
-					if (localArrayList2 == null) {
-						localArrayList1 = new ArrayList();
+					/*if (str1.equals("301")) {
+						System.out.println("null caught");
+					}*/
+					final Station stationById = this.getStationById(str1);
+					ArrayList<StationsLines> stationLines;
+					
+					if ((stationLines = stationById.getStationLines()) == null) {
+						stationLines = new ArrayList<StationsLines>();
 					}
-					localArrayList1.add(new StationsLines(str1, str2));
-					localStation.setStationLines(localArrayList1);
+					stationLines.add(new StationsLines(str1, str2));
+					stationById.setStationLines(stationLines);
 				}
 			}
 		} catch (SQLException e) {
@@ -168,14 +172,13 @@ public class StationHelper
 					String str2 = paramCursor.getString(paramCursor.findColumn("towards"));
 					String str3 = paramCursor.getString(paramCursor.findColumn("time"));
 					String str4 = paramCursor.getString(paramCursor.findColumn("isStartTime"));
-					Station localStation = getStationById(str1);
-					ArrayList localArrayList2 = localStation.getTrainTimings();
-					ArrayList localArrayList1 = localArrayList2;
-					if (localArrayList2 == null) {
-						localArrayList1 = new ArrayList();
+					final Station stationById = getStationById(str1);
+					ArrayList<TrainTimings> trainTimings;
+					if ((trainTimings = stationById.getTrainTimings()) == null) {
+						trainTimings = new ArrayList<TrainTimings>();
 					}
-					localArrayList1.add(new TrainTimings(str1, str2, str3, str4));
-					localStation.setTrainTimings(localArrayList1);
+					trainTimings.add(new TrainTimings(str1, str2, str3, str4));
+					stationById.setTrainTimings(trainTimings);
 				}
 			}
 		} catch (SQLException e) {
@@ -196,14 +199,13 @@ public class StationHelper
 		try{  
 			MetroDbHelper.getInstance().openDataBase();
 			ResultSet localObject1 = new MasterTableAPI().getAllStationsData(MetroDbHelper.getInstance());
-			//if (localObject1.isBeforeFirst())
-			// {
-			while (((ResultSet)localObject1).next())
+
+			while (localObject1.next())
 			{
-				Object localObject2 = ((ResultSet)localObject1).getString(((ResultSet)localObject1).findColumn("StationId")).trim();
-				String str1 = ((ResultSet)localObject1).getString(((ResultSet)localObject1).findColumn("STATION"));
-				String str2 = ((ResultSet)localObject1).getString(((ResultSet)localObject1).findColumn("isBus"));
-				String str3 = ((ResultSet)localObject1).getString(((ResultSet)localObject1).findColumn("LandlineNo"));
+				Object localObject2 = localObject1.getString(((ResultSet)localObject1).findColumn("StationId")).trim();
+				String str1 = localObject1.getString(((ResultSet)localObject1).findColumn("STATION"));
+				String str2 = localObject1.getString(((ResultSet)localObject1).findColumn("isBus"));
+				String str3 = localObject1.getString(((ResultSet)localObject1).findColumn("LandlineNo"));
 				String str4 = ((ResultSet)localObject1).getString(((ResultSet)localObject1).findColumn("MobileNumber"));
 				String str5 = ((ResultSet)localObject1).getString(((ResultSet)localObject1).findColumn("Latitude"));
 				String str6 = ((ResultSet)localObject1).getString(((ResultSet)localObject1).findColumn("Longitude"));
@@ -213,27 +215,19 @@ public class StationHelper
 				String str10 = ((ResultSet)localObject1).getString(((ResultSet)localObject1).findColumn("isJunction"));
 				int i = 0;
 				int k = 0;
-				try
-				{
-					int j = Integer.parseInt(((ResultSet)localObject1).getString(((ResultSet)localObject1).findColumn("xCord")));
-					i = j;
-					int m = Integer.parseInt(((ResultSet)localObject1).getString(((ResultSet)localObject1).findColumn("yCord")));
-					k = m;
-					i = j;
-				}
-				catch (Exception localException)
-				{
-					String str11;
-					for (;;) {}
-				}
+
+				int j = Integer.parseInt(((ResultSet)localObject1).getString(((ResultSet)localObject1).findColumn("xCord")));
+				i = j;
+				int m = Integer.parseInt(((ResultSet)localObject1).getString(((ResultSet)localObject1).findColumn("yCord")));
+				k = m;
+				i = j;
+
 				String str11 = ((ResultSet)localObject1).getString(((ResultSet)localObject1).findColumn("isUnderGround"));
 				Station station = new Station(((String)localObject2).trim(), str2, str3, str4, str7, str8, str1, str9, str5, str6, i, k, str11, str10);
 				this.stationList.add(station);
 			} ;
 			((ResultSet)localObject1).close();
-			// }
-			//else
-			//{
+
 			localObject1 = new StationsLinesAPI().getAllStationLines(MetroDbHelper.getInstance());
 			getStationLines((ResultSet)localObject1);
 			((ResultSet)localObject1).close();
@@ -254,7 +248,6 @@ public class StationHelper
 			((ResultSet)localObject1).close();
 			MetroDbHelper.getInstance().close();
 			return;
-			// }
 		}catch(SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -281,17 +274,12 @@ public class StationHelper
 
 	public Station getStationById(String paramString)
 	{
-		int i = 0;
-		for (;;)
-		{
-			if (i >= this.stationList.size()) {
-				return null;
+		for (int i = 0; i < this.stationList.size(); ++i) {
+			if (paramString.trim().contentEquals(this.stationList.get(i).getStationID())) {
+				return this.stationList.get(i);
 			}
-			if (paramString.trim().contentEquals(((Station)this.stationList.get(i)).getStationID())) {
-				return (Station)this.stationList.get(i);
-			}
-			i += 1;
 		}
+		return null;
 	}
 
 	public ArrayList<Station> getStationsList()
@@ -301,17 +289,12 @@ public class StationHelper
 
 	public String ifStationExists(String paramString)
 	{
-		int i = 0;
-		for (;;)
-		{
-			if (i >= this.stationList.size()) {
-				return null;
+		for (int i = 0; i < this.stationList.size(); ++i) {
+			if (paramString.contentEquals(this.stationList.get(i).getName())) {
+				return this.stationList.get(i).getStationID();
 			}
-			if (paramString.contentEquals(((Station)this.stationList.get(i)).getName())) {
-				return ((Station)this.stationList.get(i)).getStationID();
-			}
-			i += 1;
 		}
+		return null;
 	}
 
 	public boolean isChildLine(String paramString1, String paramString2)
@@ -323,7 +306,7 @@ public class StationHelper
 	{
 		return ((MetroLines)this.metroLines.get(paramString1)).getDiversionOf().equals(((MetroLines)this.metroLines.get(paramString2)).getDiversionOf());
 	}
-	
+
 	public ArrayList<Object> getNearestStation(double latitude, double longitude) throws StationNotFound{
 		try {
 			priceCalculationData = new ArrayList<Object>();
@@ -336,7 +319,7 @@ public class StationHelper
 			}else{
 				throw new StationNotFound("No station found with 15 km please try another transport");
 			}
-			
+
 			rs.close();
 			MetroDbHelper.getInstance().close();
 			return priceCalculationData;

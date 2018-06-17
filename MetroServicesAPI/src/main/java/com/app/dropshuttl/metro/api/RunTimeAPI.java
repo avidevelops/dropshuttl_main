@@ -23,7 +23,8 @@ public class RunTimeAPI
   public ResultSet getRecord(MetroDbHelper paramMetroDbHelper, String paramString1, String paramString2)
   {
     paramString2 = "\"" + paramString2 + "\"";
-    paramString1 = "Sno='" + paramString1 + "'";
+    paramString2 = "`" + paramString2 + "`";
+    paramString1 = "Sno=" + paramString1;
     try {
 		return paramMetroDbHelper.fetchData("RunTime", new String[] { paramString2 }, paramString1);
 	} catch (SQLException e) {

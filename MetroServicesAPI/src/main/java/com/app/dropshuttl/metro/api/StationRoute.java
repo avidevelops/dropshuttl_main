@@ -99,15 +99,12 @@ public class StationRoute
 //  }
   //cursor.close();
     
-    private String calcualteValue(final ParentAPI parentAPI, final String s, final String s2) throws SQLException {
+    private String calculateValue(final ParentAPI parentAPI, final String s, final String s2) throws SQLException {
         final ResultSet record = parentAPI.getRecord(MetroDbHelper.getInstance(), s, s2);
         String string = "";
         if (record.isBeforeFirst()) {
         	record.next();
             string = record.getString(1);
-        }
-        else {
-            System.out.println();
         }
         record.close();
         return this.isTime(string);
@@ -123,22 +120,22 @@ public class StationRoute
         int n = 0;
         if (this.isAirportLine) {
             if (!this.start.contentEquals(this.airportStart.get(0))) {
-                n = 0 + Integer.parseInt(this.calcualteValue(parentAPI, s, this.airportStart.get(0)));
+                n = 0 + Integer.parseInt(this.calculateValue(parentAPI, s, this.airportStart.get(0)));
             }
             for (int i = 0; i < this.airportStart.size(); ++i) {
                 int n2 = n;
                 if (i == 1) {
-                    n2 = n + Integer.parseInt(this.calcualteValue(parentAPI, this.airportEnd.get(0), this.airportStart.get(i)));
+                    n2 = n + Integer.parseInt(this.calculateValue(parentAPI, this.airportEnd.get(0), this.airportStart.get(i)));
                 }
-                n = n2 + Integer.parseInt(this.calcualteValue(parentAPI2, this.airportStart.get(i), this.airportEnd.get(i)));
+                n = n2 + Integer.parseInt(this.calculateValue(parentAPI2, this.airportStart.get(i), this.airportEnd.get(i)));
             }
             int n3 = n;
             if (!this.airportEnd.get(this.airportEnd.size() - 1).contentEquals(this.end)) {
-                n3 = n + Integer.parseInt(this.calcualteValue(parentAPI, this.airportEnd.get(this.airportEnd.size() - 1), this.end));
+                n3 = n + Integer.parseInt(this.calculateValue(parentAPI, this.airportEnd.get(this.airportEnd.size() - 1), this.end));
             }
             return n3;
         }
-        return Integer.parseInt(this.calcualteValue(parentAPI, s, s2));
+        return Integer.parseInt(this.calculateValue(parentAPI, s, s2));
     }
     
     private String isTime(final String s) {
